@@ -4,8 +4,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-07-19,3,FTNT,"Fortinet, Inc.",161.61,161.61,0.0,2026-07-19 20:52
 2026-07-19,4,CRWD,"CrowdStrike Holdings, Inc.",203.08,203.08,0.0,2026-07-19 20:52
 2026-07-19,5,DVA,DaVita Inc.,236.97,236.97,0.0,2026-07-19 20:52
-2026-07-20,1,PANW,"Palo Alto Networks, Inc.",358.68,,,
-2026-07-20,2,DDOG,"Datadog, Inc.",258.69,,,
-2026-07-20,3,FTNT,"Fortinet, Inc.",161.61,,,
-2026-07-20,4,CRWD,"CrowdStrike Holdings, Inc.",203.08,,,
-2026-07-20,5,DVA,DaVita Inc.,236.97,,,
+2026-07-20,1,DDOG,"Datadog, Inc.",267.6,,,
+2026-07-20,2,PANW,"Palo Alto Networks, Inc.",363.45,,,
+2026-07-20,3,FTNT,"Fortinet, Inc.",164.23,,,
+2026-07-20,4,CRWD,"CrowdStrike Holdings, Inc.",206.5,,,
+2026-07-20,5,DVA,DaVita Inc.,236.89,,,
