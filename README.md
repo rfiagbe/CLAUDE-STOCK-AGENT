@@ -23,7 +23,12 @@ emails a confirmation with the day's results and the running record
 
 ## Dashboard
 
-Open `dashboard.html` in any browser (double-click it). It is fully
+**Live site:** <https://rfiagbe.github.io/CLAUDE-STOCK-AGENT/> — published by
+GitHub Pages from `index.html`, which every scheduled run regenerates and
+commits. Works on phones; on iOS/Android use "Add to Home Screen" for an
+app-like icon.
+
+Locally, open `dashboard.html` in any browser (double-click it). It is fully
 self-contained, works offline, supports light/dark mode, and is rebuilt from
 the complete CSV history after every run — so it always shows everything and
 never loses data. It includes:
