@@ -16,6 +16,8 @@ from tracker import _load, load_benchmark
 log = logging.getLogger(__name__)
 
 HTML_PATH = Path(__file__).parent / "dashboard.html"
+# GitHub Pages serves index.html at the site root — same content, published copy.
+INDEX_PATH = Path(__file__).parent / "index.html"
 
 
 def generate_dashboard() -> Path:
@@ -31,8 +33,10 @@ def generate_dashboard() -> Path:
         .replace("__BENCH__", json.dumps(clean(bench)))
         .replace("__GENERATED__", datetime.now().strftime("%b %d, %Y %I:%M %p"))
     )
-    HTML_PATH.write_text(html, encoding="utf-8")
-    log.info("Dashboard regenerated: %s (%d pick rows)", HTML_PATH.name, len(picks))
+    for path in (HTML_PATH, INDEX_PATH):
+        path.write_text(html, encoding="utf-8")
+    log.info("Dashboard regenerated: %s + %s (%d pick rows)",
+             HTML_PATH.name, INDEX_PATH.name, len(picks))
     return HTML_PATH
 
 
@@ -40,8 +44,14 @@ _TEMPLATE = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Stock Agent · Performance</title>
+<meta name="description" content="Daily stock picks agent — performance, accuracy, and full pick history.">
+<meta name="theme-color" content="#0d1017">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Stock Agent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23149250'/><path d='M7 21l6-6 4 4 8-8' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
 <style>
   :root {
     color-scheme: light;
@@ -188,6 +198,29 @@ _TEMPLATE = r"""<!DOCTYPE html>
   .empty { color: var(--ink-2); padding: 24px 0; text-align: center; }
   .foot { color: var(--muted); font-size: 11px; margin-top: 22px;
           border-top: 1px solid var(--grid); padding-top: 12px; }
+
+  /* ---- phones ---- */
+  @media (max-width: 640px) {
+    .nav { padding: 10px 14px; gap: 10px; }
+    .brand { font-size: 12.5px; letter-spacing: 1.6px; }
+    .brand small { font-size: 9.5px; }
+    .nav .right { font-size: 9.5px; letter-spacing: 0.6px; }
+    .nav .right b { font-size: 11px; }
+    .wrap { padding: 0 12px; }
+    .hero { gap: 12px; margin-top: 14px; }
+    .quote { padding: 14px 16px; }
+    .quote .big { font-size: 36px; }
+    .quote .cmp { font-size: 12px; }
+    .pill { margin-left: 0; margin-top: 6px; display: inline-block; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat { padding: 12px 14px; border-top: 1px solid var(--grid); }
+    .stat:nth-child(odd) { border-left: 0; }
+    .stat:nth-child(-n+2) { border-top: 0; }
+    .card { padding: 14px 14px 12px; }
+    .search { width: 100%; }
+    td, th { padding: 6px 8px; }
+    td .co { display: none; }   /* company name off on phones — ticker is enough */
+  }
 </style>
 </head>
 <body>
@@ -433,8 +466,9 @@ function renderCum(days) {
   });
   const agentColor = pts[pts.length - 1].a >= 0 ? "var(--up)" : "var(--down)";
 
-  const W = Math.max(320, host.clientWidth), H = 270,
-        m = { t: 14, r: 118, b: 26, l: 46 },
+  const W = Math.max(300, host.clientWidth), narrow = W < 560,
+        H = narrow ? 230 : 270,
+        m = { t: 14, r: narrow ? 14 : 118, b: 26, l: narrow ? 40 : 46 },
         pw = W - m.l - m.r, ph = H - m.t - m.b;
   const vals = pts.flatMap(p => p.s == null ? [p.a] : [p.a, p.s]).concat([0]);
   const ticks = niceTicks(Math.min(...vals), Math.max(...vals));
@@ -448,7 +482,7 @@ function renderCum(days) {
     svg.append(h("g", { class: "axis" },
       h("text", { x: m.l - 8, y: y(t) + 4, "text-anchor": "end" }, fmtPct(t).replace(".00", ""))));
   });
-  const nX = Math.min(pts.length, 8);
+  const nX = Math.min(pts.length, narrow ? 4 : 8);
   for (let i = 0; i < nX; i++) {
     const idx = Math.round(i * (pts.length - 1) / Math.max(nX - 1, 1));
     svg.append(h("g", { class: "axis" },
@@ -479,9 +513,10 @@ function renderCum(days) {
   const spyEnd = pts.some(p => p.s != null) ? path(p => p.s == null ? null : y(p.s), "var(--bench)") : null;
   const aEnd = path(p => y(p.a), agentColor);
 
+  // End labels need side room; on phones the legend + tooltip carry identity instead.
   const labels = [];
-  if (aEnd) labels.push({ y: aEnd[1], text: "Agent " + fmtPct(pts[pts.length - 1].a), color: agentColor, anchorY: aEnd[1] });
-  if (spyEnd) {
+  if (!narrow && aEnd) labels.push({ y: aEnd[1], text: "Agent " + fmtPct(pts[pts.length - 1].a), color: agentColor, anchorY: aEnd[1] });
+  if (!narrow && spyEnd) {
     const lastS = pts.filter(p => p.s != null).pop();
     labels.push({ y: spyEnd[1], text: "S&P " + fmtPct(lastS.s), color: "var(--bench)", anchorY: spyEnd[1] });
   }
@@ -529,8 +564,9 @@ function renderDaily(days) {
   const complete = days.filter(d => d.avg != null);
   if (!complete.length) { host.innerHTML = '<div class="empty">No completed trading days yet.</div>'; return; }
 
-  const W = Math.max(320, host.clientWidth), H = 230,
-        m = { t: 14, r: 12, b: 26, l: 46 },
+  const W = Math.max(300, host.clientWidth), narrow = W < 560,
+        H = narrow ? 200 : 230,
+        m = { t: 14, r: 12, b: 26, l: narrow ? 40 : 46 },
         pw = W - m.l - m.r, ph = H - m.t - m.b;
   const vals = complete.flatMap(d => d.spy == null ? [d.avg] : [d.avg, d.spy]).concat([0]);
   const ticks = niceTicks(Math.min(...vals), Math.max(...vals));
@@ -573,7 +609,7 @@ function renderDaily(days) {
     hit.addEventListener("pointerleave", () => { bar.removeAttribute("opacity"); tt.style.display = "none"; });
     svg.append(hit);
   });
-  const nX = Math.min(complete.length, 8);
+  const nX = Math.min(complete.length, narrow ? 4 : 8);
   for (let i = 0; i < nX; i++) {
     const idx = Math.round(i * (complete.length - 1) / Math.max(nX - 1, 1));
     svg.append(h("g", { class: "axis" },
@@ -598,8 +634,8 @@ function renderRank(days) {
     wins: by[r].filter(v => v > 0).length,
   }));
 
-  const W = Math.max(320, host.clientWidth), H = 200,
-        m = { t: 14, r: 12, b: 26, l: 46 },
+  const W = Math.max(300, host.clientWidth), narrow = W < 560, H = 200,
+        m = { t: 14, r: 12, b: 26, l: narrow ? 40 : 46 },
         pw = W - m.l - m.r, ph = H - m.t - m.b;
   const vals = ranks.map(r => r.avg).concat([0]);
   const ticks = niceTicks(Math.min(...vals), Math.max(...vals), 4);

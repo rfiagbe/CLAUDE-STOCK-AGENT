@@ -48,9 +48,9 @@ and can be revoked anytime — it is not your real password).
 3. In this folder, copy `.env.example` to `.env` and paste the code:
 
    ```
-   GMAIL_ADDRESS=roland.claudestockagent@gmail.com
+   GMAIL_ADDRESS=your.agent.account@gmail.com
    GMAIL_APP_PASSWORD=abcdabcdabcdabcd
-   RECIPIENT=roland.claudestockagent@gmail.com
+   RECIPIENT=where.to.send@gmail.com
    ```
 
 4. Test it: open a terminal in this folder and run `python stock_agent.py`.

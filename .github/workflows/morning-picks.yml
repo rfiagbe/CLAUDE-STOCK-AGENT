@@ -36,7 +36,7 @@ jobs:
         run: |
           git config user.name "stock-agent"
           git config user.email "actions@users.noreply.github.com"
-          git add picks_history.csv benchmark_history.csv dashboard.html
+          git add picks_history.csv benchmark_history.csv dashboard.html index.html
           git diff --cached --quiet || git commit -m "Morning picks $(date -u +%F)"
           git pull --rebase origin ${{ github.ref_name }} || true
           git push
