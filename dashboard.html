@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stock Agent · Performance</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f4f5f8; --surface: #ffffff; --band: #eef0f4;
+    --ink: #111827; --ink-2: #4b5563; --muted: #8a919e;
+    --grid: #e7e9ee; --baseline: #c9cdd6; --border: #e3e5ea;
+    --up: #149250; --up-text: #0a7f3f; --down: #d91e2a; --down-text: #c11420;
+    --bench: #8a919e; --accent: #2962ff;
+    --tape-bg: #0d1017; --tape-ink: #e6e9ef; --tape-muted: #9aa4b2;
+    --up-tape: #2ebd6b; --down-tape: #f56360;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --page: #0b0e14; --surface: #131722; --band: #171c28;
+      --ink: #e6e9ef; --ink-2: #9aa4b2; --muted: #6b7280;
+      --grid: #1f2531; --baseline: #2e3542; --border: #232a35;
+      --up: #26a65d; --up-text: #2ebd6b; --down: #f23645; --down-text: #f56360;
+      --bench: #8a919e; --accent: #5b8cff;
+      --tape-bg: #0d1017; --tape-ink: #e6e9ef; --tape-muted: #9aa4b2;
+      --up-tape: #2ebd6b; --down-tape: #f56360;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--page); color: var(--ink);
+    font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding-bottom: 48px;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+  .up { color: var(--up-text); } .down { color: var(--down-text); } .mut { color: var(--muted); }
+
+  /* ---- top nav ---- */
+  .nav {
+    background: var(--tape-bg); color: var(--tape-ink);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 12px 20px; display: flex; align-items: center; gap: 12px;
+  }
+  .logo {
+    background: linear-gradient(135deg, #2ebd6b, #1a8f4e); color: #fff;
+    width: 30px; height: 30px; border-radius: 7px; display: grid; place-items: center;
+    font-weight: 800; font-size: 13px; letter-spacing: 0.5px; flex: none;
+  }
+  .brand { font-weight: 750; letter-spacing: 2.5px; font-size: 14px; }
+  .brand small { display: block; letter-spacing: 0.4px; font-weight: 400;
+                 font-size: 10.5px; color: var(--tape-muted); text-transform: uppercase; }
+  .nav .right { margin-left: auto; text-align: right; font-size: 11px; color: var(--tape-muted);
+                text-transform: uppercase; letter-spacing: 1px; }
+  .nav .right b { display: block; color: var(--tape-ink); letter-spacing: 0.3px;
+                  font-weight: 600; text-transform: none; font-size: 12px; }
+
+  /* ---- ticker tape ---- */
+  .tape { background: var(--tape-bg); border-bottom: 1px solid rgba(255,255,255,0.08);
+          overflow: hidden; white-space: nowrap; padding: 7px 0; }
+  .tape-inner { display: inline-block; animation: tape 40s linear infinite; }
+  .tape:hover .tape-inner { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) { .tape-inner { animation: none; } }
+  @keyframes tape { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .tk { display: inline-flex; gap: 7px; margin: 0 22px; font-size: 12.5px; align-items: baseline; }
+  .tk .sym { font-weight: 700; color: var(--tape-ink); letter-spacing: 0.5px; }
+  .tk .px { color: var(--tape-muted); }
+  .tk .chg { font-weight: 650; }
+  .tk .chg.up { color: var(--up-tape); } .tk .chg.down { color: var(--down-tape); }
+  .tk .chg.mut { color: var(--tape-muted); font-weight: 400; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+  /* ---- hero quote ---- */
+  .hero { display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch; margin-top: 22px; }
+  .quote { flex: 1 1 300px; background: var(--surface); border: 1px solid var(--border);
+           border-radius: 8px; padding: 18px 22px; }
+  .quote .sym { font-size: 12px; color: var(--ink-2); text-transform: uppercase;
+                letter-spacing: 1.5px; font-weight: 650; }
+  .quote .big { font-size: 44px; font-weight: 700; line-height: 1.1; margin-top: 4px; }
+  .quote .cmp { margin-top: 6px; font-size: 13px; color: var(--ink-2); }
+  .pill { display: inline-block; font-size: 12px; font-weight: 700; border-radius: 5px;
+          padding: 2px 9px; margin-left: 10px; vertical-align: middle; }
+  .pill.up { background: color-mix(in srgb, var(--up) 14%, transparent); color: var(--up-text); }
+  .pill.down { background: color-mix(in srgb, var(--down) 14%, transparent); color: var(--down-text); }
+  .stats { flex: 2 1 460px; background: var(--surface); border: 1px solid var(--border);
+           border-radius: 8px; display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+  .stat { padding: 14px 18px; border-left: 1px solid var(--grid); min-width: 0; }
+  .stat:first-child { border-left: 0; }
+  .stat .lbl { font-size: 10.5px; color: var(--muted); text-transform: uppercase;
+               letter-spacing: 1.2px; font-weight: 650; }
+  .stat .val { font-size: 21px; font-weight: 700; margin-top: 3px; }
+  .stat .sub { font-size: 11.5px; color: var(--ink-2); margin-top: 1px; }
+
+  /* ---- range tabs ---- */
+  .rangebar { display: flex; align-items: center; gap: 10px; margin: 18px 0 2px; }
+  .rangebar .cap { font-size: 10.5px; color: var(--muted); text-transform: uppercase;
+                   letter-spacing: 1.2px; font-weight: 650; }
+  .tabs { display: inline-flex; background: var(--surface); border: 1px solid var(--border);
+          border-radius: 7px; padding: 3px; gap: 2px; }
+  .tabs button { font: inherit; font-size: 12.5px; font-weight: 650; color: var(--ink-2);
+                 background: transparent; border: 0; border-radius: 5px;
+                 padding: 4px 14px; cursor: pointer; letter-spacing: 0.5px; }
+  .tabs button:hover { color: var(--ink); }
+  .tabs button.on { background: var(--accent); color: #fff; }
+
+  /* ---- cards ---- */
+  .card { background: var(--surface); border: 1px solid var(--border);
+          border-radius: 8px; padding: 16px 20px 14px; margin-top: 16px; position: relative; }
+  .card h2 { font-size: 11px; font-weight: 700; text-transform: uppercase;
+             letter-spacing: 1.6px; color: var(--ink-2); }
+  .card .note { color: var(--muted); font-size: 12px; margin-top: 3px; }
+  .legend { display: flex; gap: 16px; margin-top: 10px; font-size: 12px; color: var(--ink-2); flex-wrap: wrap; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .chart { margin-top: 4px; }
+  .chart svg { display: block; width: 100%; }
+  .tt { position: absolute; pointer-events: none; z-index: 5; display: none;
+        background: var(--surface); border: 1px solid var(--border); border-radius: 7px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.25); padding: 8px 10px; font-size: 12px; min-width: 158px; }
+  .tt .d { color: var(--muted); margin-bottom: 4px; font-size: 11px; text-transform: uppercase;
+           letter-spacing: 0.8px; }
+  .tt .row { display: flex; align-items: center; gap: 6px; }
+  .tt .key { width: 12px; height: 3px; border-radius: 2px; flex: none; }
+  .tt .v { font-weight: 700; margin-left: auto; padding-left: 12px; font-variant-numeric: tabular-nums; }
+  .axis text { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+
+  /* ---- table ---- */
+  .search { font: inherit; font-size: 13px; color: var(--ink); background: var(--page);
+            border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px;
+            width: 240px; max-width: 100%; margin-top: 10px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+  th { text-align: right; color: var(--muted); font-weight: 650; font-size: 10.5px;
+       text-transform: uppercase; letter-spacing: 1.1px;
+       padding: 7px 10px; border-bottom: 1px solid var(--baseline); }
+  th:nth-child(-n+3) { text-align: left; }
+  td { padding: 7px 10px; text-align: right; border-bottom: 1px solid var(--grid);
+       font-variant-numeric: tabular-nums; }
+  td:nth-child(-n+3) { text-align: left; }
+  tbody tr:not(.day):hover td { background: var(--band); }
+  td .tick { font-weight: 700; letter-spacing: 0.4px; }
+  td .co { color: var(--muted); font-size: 12px; }
+  tr.day td { background: var(--band); border-top: 1px solid var(--baseline);
+              font-weight: 650; }
+  .chip { font-size: 10px; font-weight: 750; border-radius: 4px; padding: 2px 8px;
+          letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+  .chip.up { background: color-mix(in srgb, var(--up) 14%, transparent); color: var(--up-text); }
+  .chip.down { background: color-mix(in srgb, var(--down) 14%, transparent); color: var(--down-text); }
+  .chip.mut { background: var(--band); color: var(--muted); border: 1px solid var(--border); }
+  .empty { color: var(--ink-2); padding: 24px 0; text-align: center; }
+  .foot { color: var(--muted); font-size: 11px; margin-top: 22px;
+          border-top: 1px solid var(--grid); padding-top: 12px; }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="logo">SA</div>
+  <div class="brand">STOCK AGENT<small>Daily Picks · Performance</small></div>
+  <div class="right">Last update<b>Jul 19, 2026 10:21 PM ET</b></div>
+</header>
+<div class="tape" aria-hidden="true"><div class="tape-inner" id="tape"></div></div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="quote">
+      <div class="sym">Agent Portfolio · Cumulative</div>
+      <div class="big num" id="heroVal">—</div>
+      <div class="cmp" id="heroCmp"></div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <div class="rangebar">
+    <span class="cap">Range</span>
+    <div class="tabs" id="filters" role="group" aria-label="Date range">
+      <button data-r="7">7D</button>
+      <button data-r="30">1M</button>
+      <button data-r="90">3M</button>
+      <button data-r="all" class="on">ALL</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Cumulative Return</h2>
+    <div class="note">Equal-weight portfolio of the day's picks vs S&amp;P 500 (SPY), compounded from day averages</div>
+    <div class="legend">
+      <span><svg width="14" height="4"><rect width="14" height="3" rx="1.5" id="legAgent" fill="var(--up)"/></svg>Agent picks</span>
+      <span><svg width="14" height="4"><rect width="14" height="3" rx="1.5" fill="var(--bench)"/></svg>S&amp;P 500</span>
+    </div>
+    <div class="chart" id="cumChart"></div>
+    <div class="tt" id="cumTT"></div>
+  </div>
+
+  <div class="card">
+    <h2>Daily Result</h2>
+    <div class="note">Average day change of the picks; the dot marks the S&amp;P 500 the same day</div>
+    <div class="legend">
+      <span><svg width="12" height="12"><rect width="12" height="12" rx="3" fill="var(--up)"/></svg>Up day</span>
+      <span><svg width="12" height="12"><rect width="12" height="12" rx="3" fill="var(--down)"/></svg>Down day</span>
+      <span><svg width="12" height="12"><circle cx="6" cy="6" r="4.5" fill="var(--bench)"/></svg>S&amp;P 500</span>
+    </div>
+    <div class="chart" id="dayChart"></div>
+    <div class="tt" id="dayTT"></div>
+  </div>
+
+  <div class="card">
+    <h2>Performance by Pick Rank</h2>
+    <div class="note">Average day change by screen rank — is the #1 pick actually the best?</div>
+    <div class="chart" id="rankChart"></div>
+    <div class="tt" id="rankTT"></div>
+  </div>
+
+  <div class="card">
+    <h2>Pick History</h2>
+    <div class="note">Every pick ever made, newest first — nothing is removed over time</div>
+    <input class="search" id="search" type="search" placeholder="Search ticker or company…" aria-label="Search picks">
+    <div id="tableWrap" style="overflow-x:auto;"></div>
+  </div>
+
+  <div class="foot">Generated automatically by the stock agent after each end-of-day update.
+  Rules-based momentum screen — informational only, not investment advice.
+  Day change measures pick price (prior close) to same-day close and excludes costs and slippage.</div>
+</div>
+
+<script>
+"use strict";
+const PICKS = [{"date": "2026-07-19", "rank": 1, "ticker": "PANW", "name": "Palo Alto Networks, Inc.", "pick_price": 358.68, "close_price": 358.68, "day_change_pct": 0.0, "updated_at": "2026-07-19 20:52"}, {"date": "2026-07-19", "rank": 2, "ticker": "DDOG", "name": "Datadog, Inc.", "pick_price": 258.69, "close_price": 258.69, "day_change_pct": 0.0, "updated_at": "2026-07-19 20:52"}, {"date": "2026-07-19", "rank": 3, "ticker": "FTNT", "name": "Fortinet, Inc.", "pick_price": 161.61, "close_price": 161.61, "day_change_pct": 0.0, "updated_at": "2026-07-19 20:52"}, {"date": "2026-07-19", "rank": 4, "ticker": "CRWD", "name": "CrowdStrike Holdings, Inc.", "pick_price": 203.08, "close_price": 203.08, "day_change_pct": 0.0, "updated_at": "2026-07-19 20:52"}, {"date": "2026-07-19", "rank": 5, "ticker": "DVA", "name": "DaVita Inc.", "pick_price": 236.97, "close_price": 236.97, "day_change_pct": 0.0, "updated_at": "2026-07-19 20:52"}];
+const BENCH = [{"date": "2026-07-19", "spy_close": 743.29, "spy_change_pct": 0.0}];
+const SPY = Object.fromEntries(BENCH.map(b => [b.date, b]));
+
+const state = { range: "all", search: "" };
+const fmtPct = v => (v >= 0 ? "+" : "") + v.toFixed(2) + "%";
+const arrowPct = v => (v > 0 ? "▲ " : v < 0 ? "▼ " : "— ") + fmtPct(v);
+const fmtUSD = v => "$" + Number(v).toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const fmtDate = d => { const [y,m,dd] = d.split("-"); return `${+m}/${+dd}/${y.slice(2)}`; };
+const cls = v => v > 0 ? "up" : v < 0 ? "down" : "mut";
+
+function filtered() {
+  if (state.range === "all") return PICKS;
+  const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - +state.range);
+  const c = cutoff.toISOString().slice(0, 10);
+  return PICKS.filter(p => p.date >= c);
+}
+
+function dayGroups(rows) {
+  const by = {};
+  rows.forEach(p => (by[p.date] = by[p.date] || []).push(p));
+  return Object.keys(by).sort().map(date => {
+    const picks = by[date].slice().sort((a, b) => a.rank - b.rank);
+    const done = picks.filter(p => p.day_change_pct != null);
+    const avg = done.length ? done.reduce((s, p) => s + p.day_change_pct, 0) / done.length : null;
+    const spy = SPY[date] ? SPY[date].spy_change_pct : null;
+    return { date, picks, done, avg, spy,
+             wins: done.filter(p => p.day_change_pct > 0).length,
+             beat: (avg != null && spy != null) ? avg > spy : null };
+  });
+}
+
+function computeKPIs(days) {
+  const complete = days.filter(d => d.avg != null);
+  let cum = 1, cumSpy = 1, beats = 0, spyDays = 0;
+  const allDone = complete.flatMap(d => d.done);
+  complete.forEach(d => {
+    cum *= 1 + d.avg / 100;
+    if (d.spy != null) { cumSpy *= 1 + d.spy / 100; spyDays++; if (d.beat) beats++; }
+  });
+  const wins = allDone.filter(p => p.day_change_pct > 0).length;
+  return {
+    days: complete.length, picks: allDone.length,
+    winRate: allDone.length ? wins / allDone.length * 100 : null,
+    avg: allDone.length ? allDone.reduce((s, p) => s + p.day_change_pct, 0) / allDone.length : null,
+    cum: complete.length ? (cum - 1) * 100 : null,
+    cumSpy: spyDays ? (cumSpy - 1) * 100 : null,
+    beats, spyDays,
+    pending: days.reduce((s, d) => s + (d.picks.length - d.done.length), 0),
+  };
+}
+
+/* ---------- ticker tape ---------- */
+function renderTape() {
+  const days = dayGroups(PICKS);
+  const last = days[days.length - 1];
+  const el = document.getElementById("tape");
+  if (!last) return;
+  const items = last.picks.map(p => ({
+    sym: p.ticker,
+    px: p.close_price != null ? p.close_price : p.pick_price,
+    chg: p.day_change_pct,
+  }));
+  if (SPY[last.date]) items.push({ sym: "SPY", px: SPY[last.date].spy_close, chg: SPY[last.date].spy_change_pct });
+  const half = document.createElement("span");
+  items.forEach(it => {
+    const tk = document.createElement("span"); tk.className = "tk";
+    const s = document.createElement("span"); s.className = "sym"; s.textContent = it.sym;
+    const px = document.createElement("span"); px.className = "px num"; px.textContent = fmtUSD(it.px);
+    const c = document.createElement("span");
+    c.className = "chg num " + (it.chg == null ? "mut" : cls(it.chg));
+    c.textContent = it.chg == null ? "pending" : arrowPct(it.chg);
+    tk.append(s, px, c); half.append(tk);
+  });
+  el.replaceChildren(half, half.cloneNode(true));
+}
+
+/* ---------- hero + stats ---------- */
+function renderHero(days) {
+  const k = computeKPIs(days);
+  const hv = document.getElementById("heroVal"), hc = document.getElementById("heroCmp");
+  hv.textContent = k.cum == null ? "—" : fmtPct(k.cum);
+  hv.className = "big num " + (k.cum == null ? "" : cls(k.cum));
+  hc.replaceChildren();
+  if (k.cumSpy != null) {
+    const diff = k.cum - k.cumSpy;
+    hc.append("S&P 500 " + fmtPct(k.cumSpy) + " same period");
+    const pill = document.createElement("span");
+    pill.className = "pill " + (diff >= 0 ? "up" : "down");
+    pill.textContent = (diff >= 0 ? "+" : "") + diff.toFixed(2) + " pts vs index";
+    hc.append(pill);
+  } else if (k.cum != null) {
+    hc.append("no benchmark data yet");
+  } else {
+    hc.append("awaiting first completed trading day");
+  }
+  document.getElementById("legAgent").setAttribute("fill",
+    k.cum != null && k.cum < 0 ? "var(--down)" : "var(--up)");
+
+  const stats = document.getElementById("stats"); stats.replaceChildren();
+  const stat = (lbl, val, sub, valCls) => {
+    const d = document.createElement("div"); d.className = "stat";
+    const l = document.createElement("div"); l.className = "lbl"; l.textContent = lbl;
+    const v = document.createElement("div"); v.className = "val num " + (valCls || "");
+    v.textContent = val;
+    d.append(l, v);
+    if (sub) { const s = document.createElement("div"); s.className = "sub"; s.textContent = sub; d.append(s); }
+    return d;
+  };
+  stats.append(
+    stat("Win rate", k.winRate == null ? "—" : k.winRate.toFixed(0) + "%",
+         k.picks ? `${Math.round(k.winRate / 100 * k.picks)}/${k.picks} picks up` : ""),
+    stat("Avg day / pick", k.avg == null ? "—" : fmtPct(k.avg), "", k.avg == null ? "" : cls(k.avg)),
+    stat("Beat S&P 500", k.spyDays ? `${k.beats}/${k.spyDays}` : "—",
+         k.spyDays ? (k.beats / k.spyDays * 100).toFixed(0) + "% of days" : ""),
+    stat("Days tracked", String(k.days), k.pending ? k.pending + " pending" : ""),
+    stat("Picks tracked", String(k.picks), "")
+  );
+}
+
+/* ---------- SVG helpers ---------- */
+const NS = "http://www.w3.org/2000/svg";
+function h(tag, attrs, ...kids) {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v);
+  kids.forEach(k => e.append(k));
+  return e;
+}
+function niceTicks(lo, hi, n = 5) {
+  if (lo === hi) { lo -= 1; hi += 1; }
+  const span = hi - lo, step0 = span / n, mag = Math.pow(10, Math.floor(Math.log10(step0)));
+  const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => span / s <= n) || 10 * mag;
+  const t = []; for (let v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) t.push(+v.toFixed(10));
+  return t;
+}
+function ttRow(tt, color, label, value, valCls) {
+  const r = document.createElement("div"); r.className = "row";
+  const key = document.createElement("span"); key.className = "key"; key.style.background = color;
+  const l = document.createElement("span"); l.textContent = label; l.style.color = "var(--ink-2)";
+  const v = document.createElement("span"); v.className = "v " + (valCls || ""); v.textContent = value;
+  r.append(key, l, v); tt.append(r);
+}
+function moveTT(tt, card, ev) {
+  const r = card.getBoundingClientRect();
+  let x = ev.clientX - r.left + 14, y = ev.clientY - r.top + 10;
+  tt.style.display = "block";
+  if (x + tt.offsetWidth > r.width - 8) x = ev.clientX - r.left - tt.offsetWidth - 14;
+  tt.style.left = x + "px"; tt.style.top = y + "px";
+}
+function roundedBar(xL, y0, top, bot, bw, up) {
+  const hgt = Math.max(bot - top, 1), r = Math.min(4, bw / 2, hgt);
+  return up
+    ? `M${xL},${y0} L${xL},${top + r} Q${xL},${top} ${xL + r},${top} L${xL + bw - r},${top} Q${xL + bw},${top} ${xL + bw},${top + r} L${xL + bw},${y0} Z`
+    : `M${xL},${y0} L${xL},${bot - r} Q${xL},${bot} ${xL + r},${bot} L${xL + bw - r},${bot} Q${xL + bw},${bot} ${xL + bw},${bot - r} L${xL + bw},${y0} Z`;
+}
+
+/* ---------- Cumulative line chart ---------- */
+function renderCum(days) {
+  const host = document.getElementById("cumChart"), tt = document.getElementById("cumTT");
+  host.replaceChildren();
+  const complete = days.filter(d => d.avg != null);
+  if (!complete.length) { host.innerHTML = '<div class="empty">No completed trading days yet — check back after the first end-of-day update.</div>'; return; }
+
+  let cum = 1, cumSpy = 1;
+  const pts = complete.map(d => {
+    cum *= 1 + d.avg / 100;
+    if (d.spy != null) cumSpy *= 1 + d.spy / 100;
+    return { date: d.date, a: (cum - 1) * 100, s: d.spy != null ? (cumSpy - 1) * 100 : null };
+  });
+  const agentColor = pts[pts.length - 1].a >= 0 ? "var(--up)" : "var(--down)";
+
+  const W = Math.max(320, host.clientWidth), H = 270,
+        m = { t: 14, r: 118, b: 26, l: 46 },
+        pw = W - m.l - m.r, ph = H - m.t - m.b;
+  const vals = pts.flatMap(p => p.s == null ? [p.a] : [p.a, p.s]).concat([0]);
+  const ticks = niceTicks(Math.min(...vals), Math.max(...vals));
+  const y = v => m.t + ph - (v - ticks[0]) / (ticks[ticks.length - 1] - ticks[0]) * ph;
+  const x = i => pts.length === 1 ? m.l + pw / 2 : m.l + i / (pts.length - 1) * pw;
+
+  const svg = h("svg", { viewBox: `0 0 ${W} ${H}`, height: H });
+  ticks.forEach(t => {
+    svg.append(h("line", { x1: m.l, x2: m.l + pw, y1: y(t), y2: y(t),
+      stroke: t === 0 ? "var(--baseline)" : "var(--grid)", "stroke-width": 1 }));
+    svg.append(h("g", { class: "axis" },
+      h("text", { x: m.l - 8, y: y(t) + 4, "text-anchor": "end" }, fmtPct(t).replace(".00", ""))));
+  });
+  const nX = Math.min(pts.length, 8);
+  for (let i = 0; i < nX; i++) {
+    const idx = Math.round(i * (pts.length - 1) / Math.max(nX - 1, 1));
+    svg.append(h("g", { class: "axis" },
+      h("text", { x: x(idx), y: H - 8, "text-anchor": "middle" }, fmtDate(pts[idx].date))));
+  }
+
+  // Area wash under the agent line
+  if (pts.length > 1) {
+    const seg = pts.map((p, i) => [x(i), y(p.a)]);
+    svg.append(h("path", {
+      d: "M" + seg.map(p => p[0] + "," + p[1]).join("L") +
+         `L${seg[seg.length - 1][0]},${y(Math.max(ticks[0], Math.min(0, ticks[ticks.length-1])))}` +
+         `L${seg[0][0]},${y(Math.max(ticks[0], Math.min(0, ticks[ticks.length-1])))} Z`,
+      fill: agentColor, opacity: 0.10 }));
+  }
+
+  const path = (get, color) => {
+    const seg = pts.map((p, i) => [x(i), get(p)]).filter(p => p[1] != null);
+    if (seg.length > 1)
+      svg.append(h("path", { d: "M" + seg.map(p => p[0] + "," + p[1]).join("L"),
+        fill: "none", stroke: color, "stroke-width": 2,
+        "stroke-linejoin": "round", "stroke-linecap": "round" }));
+    const last = seg[seg.length - 1];
+    if (last) svg.append(h("circle", { cx: last[0], cy: last[1], r: 4.5,
+      fill: color, stroke: "var(--surface)", "stroke-width": 2 }));
+    return last;
+  };
+  const spyEnd = pts.some(p => p.s != null) ? path(p => p.s == null ? null : y(p.s), "var(--bench)") : null;
+  const aEnd = path(p => y(p.a), agentColor);
+
+  const labels = [];
+  if (aEnd) labels.push({ y: aEnd[1], text: "Agent " + fmtPct(pts[pts.length - 1].a), color: agentColor, anchorY: aEnd[1] });
+  if (spyEnd) {
+    const lastS = pts.filter(p => p.s != null).pop();
+    labels.push({ y: spyEnd[1], text: "S&P " + fmtPct(lastS.s), color: "var(--bench)", anchorY: spyEnd[1] });
+  }
+  labels.sort((a, b) => a.y - b.y);
+  if (labels.length === 2 && labels[1].y - labels[0].y < 16) {
+    const mid = (labels[0].y + labels[1].y) / 2;
+    labels[0].y = mid - 9; labels[1].y = mid + 9;
+  }
+  labels.forEach(L => {
+    if (Math.abs(L.y - L.anchorY) > 2)
+      svg.append(h("line", { x1: m.l + pw + 6, x2: m.l + pw + 16, y1: L.anchorY, y2: L.y,
+        stroke: "var(--grid)", "stroke-width": 1 }));
+    svg.append(h("line", { x1: m.l + pw + 18, x2: m.l + pw + 28, y1: L.y, y2: L.y,
+      stroke: L.color, "stroke-width": 3 }));
+    svg.append(h("g", { class: "axis" },
+      h("text", { x: m.l + pw + 32, y: L.y + 4, style: "fill:var(--ink-2)" }, L.text)));
+  });
+
+  const cross = h("line", { y1: m.t, y2: m.t + ph, stroke: "var(--baseline)",
+    "stroke-width": 1, visibility: "hidden" });
+  svg.append(cross);
+  const card = host.closest(".card");
+  svg.addEventListener("pointermove", ev => {
+    const box = svg.getBoundingClientRect();
+    const px = (ev.clientX - box.left) * W / box.width;
+    let idx = 0, best = 1e9;
+    pts.forEach((p, i) => { const d = Math.abs(x(i) - px); if (d < best) { best = d; idx = i; } });
+    cross.setAttribute("x1", x(idx)); cross.setAttribute("x2", x(idx));
+    cross.setAttribute("visibility", "visible");
+    tt.replaceChildren();
+    const dEl = document.createElement("div"); dEl.className = "d";
+    dEl.textContent = fmtDate(pts[idx].date); tt.append(dEl);
+    ttRow(tt, agentColor, "Agent", fmtPct(pts[idx].a), cls(pts[idx].a));
+    if (pts[idx].s != null) ttRow(tt, "var(--bench)", "S&P 500", fmtPct(pts[idx].s));
+    moveTT(tt, card, ev);
+  });
+  svg.addEventListener("pointerleave", () => { tt.style.display = "none"; cross.setAttribute("visibility", "hidden"); });
+  host.append(svg);
+}
+
+/* ---------- Daily bars ---------- */
+function renderDaily(days) {
+  const host = document.getElementById("dayChart"), tt = document.getElementById("dayTT");
+  host.replaceChildren();
+  const complete = days.filter(d => d.avg != null);
+  if (!complete.length) { host.innerHTML = '<div class="empty">No completed trading days yet.</div>'; return; }
+
+  const W = Math.max(320, host.clientWidth), H = 230,
+        m = { t: 14, r: 12, b: 26, l: 46 },
+        pw = W - m.l - m.r, ph = H - m.t - m.b;
+  const vals = complete.flatMap(d => d.spy == null ? [d.avg] : [d.avg, d.spy]).concat([0]);
+  const ticks = niceTicks(Math.min(...vals), Math.max(...vals));
+  const y = v => m.t + ph - (v - ticks[0]) / (ticks[ticks.length - 1] - ticks[0]) * ph;
+
+  const svg = h("svg", { viewBox: `0 0 ${W} ${H}`, height: H });
+  ticks.forEach(t => {
+    svg.append(h("line", { x1: m.l, x2: m.l + pw, y1: y(t), y2: y(t),
+      stroke: t === 0 ? "var(--baseline)" : "var(--grid)", "stroke-width": 1 }));
+    svg.append(h("g", { class: "axis" },
+      h("text", { x: m.l - 8, y: y(t) + 4, "text-anchor": "end" }, fmtPct(t).replace(".00", ""))));
+  });
+
+  const band = pw / complete.length,
+        bw = Math.min(24, Math.max(4, band - 2)),
+        y0 = y(0);
+  const card = host.closest(".card");
+  complete.forEach((d, i) => {
+    const cx = m.l + band * (i + 0.5), top = y(Math.max(d.avg, 0)), bot = y(Math.min(d.avg, 0));
+    const up = d.avg >= 0;
+    const bar = h("path", { d: roundedBar(cx - bw / 2, y0, top, bot, bw, up),
+      fill: up ? "var(--up)" : "var(--down)" });
+    svg.append(bar);
+    if (d.spy != null)
+      svg.append(h("circle", { cx, cy: y(d.spy), r: 4.5, fill: "var(--bench)",
+        stroke: "var(--surface)", "stroke-width": 2 }));
+    const hit = h("rect", { x: m.l + band * i, y: m.t, width: band, height: ph,
+      fill: "transparent" });
+    hit.addEventListener("pointermove", ev => {
+      bar.setAttribute("opacity", "0.8");
+      tt.replaceChildren();
+      const dEl = document.createElement("div"); dEl.className = "d";
+      dEl.textContent = fmtDate(d.date) + ` · ${d.wins}/${d.done.length} picks up`;
+      tt.append(dEl);
+      ttRow(tt, up ? "var(--up)" : "var(--down)", "Picks avg", fmtPct(d.avg), cls(d.avg));
+      if (d.spy != null) ttRow(tt, "var(--bench)", "S&P 500", fmtPct(d.spy));
+      d.done.forEach(p => ttRow(tt, "transparent", p.ticker, fmtPct(p.day_change_pct), cls(p.day_change_pct)));
+      moveTT(tt, card, ev);
+    });
+    hit.addEventListener("pointerleave", () => { bar.removeAttribute("opacity"); tt.style.display = "none"; });
+    svg.append(hit);
+  });
+  const nX = Math.min(complete.length, 8);
+  for (let i = 0; i < nX; i++) {
+    const idx = Math.round(i * (complete.length - 1) / Math.max(nX - 1, 1));
+    svg.append(h("g", { class: "axis" },
+      h("text", { x: m.l + band * (idx + 0.5), y: H - 8, "text-anchor": "middle" },
+        fmtDate(complete[idx].date))));
+  }
+  host.append(svg);
+}
+
+/* ---------- Rank bars ---------- */
+function renderRank(days) {
+  const host = document.getElementById("rankChart"), tt = document.getElementById("rankTT");
+  host.replaceChildren();
+  const done = days.flatMap(d => d.done);
+  if (!done.length) { host.innerHTML = '<div class="empty">No completed picks yet.</div>'; return; }
+
+  const by = {};
+  done.forEach(p => (by[p.rank] = by[p.rank] || []).push(p.day_change_pct));
+  const ranks = Object.keys(by).sort((a, b) => a - b).map(r => ({
+    rank: r, n: by[r].length,
+    avg: by[r].reduce((s, v) => s + v, 0) / by[r].length,
+    wins: by[r].filter(v => v > 0).length,
+  }));
+
+  const W = Math.max(320, host.clientWidth), H = 200,
+        m = { t: 14, r: 12, b: 26, l: 46 },
+        pw = W - m.l - m.r, ph = H - m.t - m.b;
+  const vals = ranks.map(r => r.avg).concat([0]);
+  const ticks = niceTicks(Math.min(...vals), Math.max(...vals), 4);
+  const y = v => m.t + ph - (v - ticks[0]) / (ticks[ticks.length - 1] - ticks[0]) * ph;
+  const svg = h("svg", { viewBox: `0 0 ${W} ${H}`, height: H });
+  ticks.forEach(t => {
+    svg.append(h("line", { x1: m.l, x2: m.l + pw, y1: y(t), y2: y(t),
+      stroke: t === 0 ? "var(--baseline)" : "var(--grid)", "stroke-width": 1 }));
+    svg.append(h("g", { class: "axis" },
+      h("text", { x: m.l - 8, y: y(t) + 4, "text-anchor": "end" }, fmtPct(t).replace(".00", ""))));
+  });
+  const band = pw / ranks.length, bw = Math.min(24, band - 2), y0 = y(0);
+  const card = host.closest(".card");
+  ranks.forEach((r, i) => {
+    const cx = m.l + band * (i + 0.5), up = r.avg >= 0,
+          top = y(Math.max(r.avg, 0)), bot = y(Math.min(r.avg, 0));
+    const bar = h("path", { d: roundedBar(cx - bw / 2, y0, top, bot, bw, up),
+      fill: up ? "var(--up)" : "var(--down)" });
+    svg.append(bar);
+    svg.append(h("g", { class: "axis" },
+      h("text", { x: cx, y: H - 8, "text-anchor": "middle" }, "#" + r.rank)));
+    const hit = h("rect", { x: m.l + band * i, y: m.t, width: band, height: ph, fill: "transparent" });
+    hit.addEventListener("pointermove", ev => {
+      bar.setAttribute("opacity", "0.8"); tt.replaceChildren();
+      const dEl = document.createElement("div"); dEl.className = "d";
+      dEl.textContent = "Rank #" + r.rank + " · " + r.n + " picks"; tt.append(dEl);
+      ttRow(tt, up ? "var(--up)" : "var(--down)", "Avg day change", fmtPct(r.avg), cls(r.avg));
+      ttRow(tt, "transparent", "Win rate", (r.wins / r.n * 100).toFixed(0) + "%");
+      moveTT(tt, card, ev);
+    });
+    hit.addEventListener("pointerleave", () => { bar.removeAttribute("opacity"); tt.style.display = "none"; });
+    svg.append(hit);
+  });
+  host.append(svg);
+}
+
+/* ---------- History table ---------- */
+function renderTable(days) {
+  const wrap = document.getElementById("tableWrap");
+  wrap.replaceChildren();
+  const q = state.search.trim().toLowerCase();
+  const table = document.createElement("table");
+  const thead = document.createElement("thead");
+  const hr = document.createElement("tr");
+  ["Date", "#", "Symbol", "Pick Price", "Close", "Day Chg %", ""].forEach(t => {
+    const th = document.createElement("th"); th.textContent = t; hr.append(th);
+  });
+  thead.append(hr); table.append(thead);
+  const tbody = document.createElement("tbody");
+
+  let shown = 0;
+  days.slice().reverse().forEach(d => {
+    const rows = d.picks.filter(p => !q ||
+      p.ticker.toLowerCase().includes(q) || String(p.name || "").toLowerCase().includes(q));
+    if (!rows.length) return;
+    shown += rows.length;
+
+    const dayTr = document.createElement("tr"); dayTr.className = "day";
+    const td0 = document.createElement("td"); td0.textContent = fmtDate(d.date);
+    td0.className = "num";
+    const td1 = document.createElement("td"); td1.colSpan = 5;
+    td1.textContent = d.avg == null ? "awaiting close"
+      : `avg ${fmtPct(d.avg)} · S&P 500 ${d.spy == null ? "—" : fmtPct(d.spy)} · ${d.wins}/${d.done.length} up`;
+    td1.style.textAlign = "left"; td1.style.fontWeight = "400"; td1.style.color = "var(--ink-2)";
+    const td2 = document.createElement("td"); td2.style.textAlign = "right";
+    const chip = document.createElement("span"); chip.className = "chip";
+    if (d.beat == null) { chip.classList.add("mut"); chip.textContent = "Pending"; }
+    else if (d.beat) { chip.classList.add("up"); chip.textContent = "✓ Beat S&P"; }
+    else { chip.classList.add("down"); chip.textContent = "✕ Trailed"; }
+    td2.append(chip);
+    dayTr.append(td0, td1, td2); tbody.append(dayTr);
+
+    rows.forEach(p => {
+      const tr = document.createElement("tr");
+      const c = (txt, klass) => { const td = document.createElement("td");
+        td.textContent = txt; if (klass) td.className = klass; return td; };
+      const sym = document.createElement("td");
+      const tick = document.createElement("span"); tick.className = "tick"; tick.textContent = p.ticker;
+      const co = document.createElement("span"); co.className = "co";
+      co.textContent = p.name ? "  " + p.name : "";
+      sym.append(tick, co);
+      tr.append(
+        c("", ""), c("#" + p.rank, "mut num"), sym,
+        c(fmtUSD(p.pick_price), "num"),
+        c(p.close_price == null ? "—" : fmtUSD(p.close_price), "num" + (p.close_price == null ? " mut" : "")),
+        c(p.day_change_pct == null ? "pending" : arrowPct(p.day_change_pct),
+          "num " + (p.day_change_pct == null ? "mut" : cls(p.day_change_pct))),
+        c("", "")
+      );
+      tbody.append(tr);
+    });
+  });
+  table.append(tbody);
+  if (!shown) {
+    const e = document.createElement("div"); e.className = "empty";
+    e.textContent = "No picks match."; wrap.append(e);
+  } else wrap.append(table);
+}
+
+/* ---------- Orchestration ---------- */
+function renderAll() {
+  const days = dayGroups(filtered());
+  renderHero(days); renderCum(days); renderDaily(days); renderRank(days); renderTable(days);
+}
+document.getElementById("filters").addEventListener("click", ev => {
+  const b = ev.target.closest("button"); if (!b) return;
+  state.range = b.dataset.r;
+  document.querySelectorAll("#filters button").forEach(x => x.classList.toggle("on", x === b));
+  renderAll();
+});
+document.getElementById("search").addEventListener("input", ev => {
+  state.search = ev.target.value;
+  renderTable(dayGroups(filtered()));
+});
+let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderAll, 150); });
+renderTape();
+renderAll();
+</script>
+</body>
+</html>

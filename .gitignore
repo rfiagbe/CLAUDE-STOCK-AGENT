@@ -1,0 +1,9 @@
+# Credentials — never commit
+.env
+
+# Local run artifacts
+__pycache__/
+agent.log
+task_run.log
+picks_preview.html
+backups/
