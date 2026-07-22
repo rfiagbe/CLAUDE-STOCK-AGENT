@@ -14,3 +14,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-07-21,3,FTNT,"Fortinet, Inc.",158.77,158.1,-0.42,2026-07-21 22:50
 2026-07-21,4,DVA,DaVita Inc.,235.46,237.28,0.77,2026-07-21 22:50
 2026-07-21,5,CRWD,"CrowdStrike Holdings, Inc.",196.27,191.15,-2.61,2026-07-21 22:50
+2026-07-22,1,DELL,Dell Technologies Inc.,437.53,,,
+2026-07-22,2,AMD,"Advanced Micro Devices, Inc.",549.9,,,
+2026-07-22,3,HPE,Hewlett Packard Enterprise Comp,48.81,,,
+2026-07-22,4,DVA,DaVita Inc.,235.45,,,
+2026-07-22,5,STX,Seagate Technology Holdings PLC,900.62,,,
