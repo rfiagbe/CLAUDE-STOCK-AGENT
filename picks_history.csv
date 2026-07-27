@@ -29,8 +29,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-07-24,3,DVA,DaVita Inc.,236.38,235.44,-0.4,2026-07-24 22:57
 2026-07-24,4,STX,Seagate Technology Holdings PLC,892.0,851.69,-4.52,2026-07-24 22:57
 2026-07-24,5,MPC,Marathon Petroleum Corporation,310.45,309.24,-0.39,2026-07-24 22:57
-2026-07-27,1,DVA,DaVita Inc.,237.9,,,
-2026-07-27,2,HPE,Hewlett Packard Enterprise Comp,47.33,,,
-2026-07-27,3,NTAP,"NetApp, Inc.",166.82,,,
-2026-07-27,4,MPC,Marathon Petroleum Corporation,307.34,,,
-2026-07-27,5,BBY,"Best Buy Co., Inc.",87.25,,,
+2026-07-27,1,DVA,DaVita Inc.,237.9,236.31,-0.67,2026-07-27 22:56
+2026-07-27,2,HPE,Hewlett Packard Enterprise Comp,47.33,48.19,1.82,2026-07-27 22:56
+2026-07-27,3,NTAP,"NetApp, Inc.",166.82,169.8,1.79,2026-07-27 22:56
+2026-07-27,4,MPC,Marathon Petroleum Corporation,307.34,312.35,1.63,2026-07-27 22:56
+2026-07-27,5,BBY,"Best Buy Co., Inc.",87.25,88.45,1.38,2026-07-27 22:56
