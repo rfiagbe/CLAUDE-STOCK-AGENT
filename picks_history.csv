@@ -39,8 +39,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-07-28,3,NTAP,"NetApp, Inc.",166.7,174.53,4.7,2026-07-28 22:54
 2026-07-28,4,BBY,"Best Buy Co., Inc.",90.29,89.47,-0.91,2026-07-28 22:54
 2026-07-28,5,VLO,Valero Energy Corporation,305.73,298.88,-2.24,2026-07-28 22:54
-2026-07-29,1,DVA,DaVita Inc.,243.29,,,
-2026-07-29,2,NTAP,"NetApp, Inc.",174.29,,,
-2026-07-29,3,MPC,Marathon Petroleum Corporation,310.85,,,
-2026-07-29,4,HPQ,HP Inc.,28.5,,,
-2026-07-29,5,BBY,"Best Buy Co., Inc.",89.62,,,
+2026-07-29,1,DVA,DaVita Inc.,243.29,240.96,-0.96,2026-07-29 22:56
+2026-07-29,2,NTAP,"NetApp, Inc.",174.29,173.23,-0.61,2026-07-29 22:56
+2026-07-29,3,MPC,Marathon Petroleum Corporation,310.85,308.72,-0.69,2026-07-29 22:56
+2026-07-29,4,HPQ,HP Inc.,28.5,28.41,-0.32,2026-07-29 22:56
+2026-07-29,5,BBY,"Best Buy Co., Inc.",89.62,90.17,0.61,2026-07-29 22:56
