@@ -44,3 +44,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-07-29,3,MPC,Marathon Petroleum Corporation,310.85,308.72,-0.69,2026-07-29 22:56
 2026-07-29,4,HPQ,HP Inc.,28.5,28.41,-0.32,2026-07-29 22:56
 2026-07-29,5,BBY,"Best Buy Co., Inc.",89.62,90.17,0.61,2026-07-29 22:56
+2026-07-30,1,DDOG,"Datadog, Inc.",269.93,,,
+2026-07-30,2,FTNT,"Fortinet, Inc.",160.16,,,
+2026-07-30,3,DVA,DaVita Inc.,240.26,,,
+2026-07-30,4,HPE,Hewlett Packard Enterprise Comp,46.43,,,
+2026-07-30,5,NTAP,"NetApp, Inc.",173.07,,,
