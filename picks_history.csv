@@ -49,8 +49,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-07-30,3,DVA,DaVita Inc.,240.26,238.86,-0.58,2026-07-30 22:59
 2026-07-30,4,HPE,Hewlett Packard Enterprise Comp,46.43,47.14,1.53,2026-07-30 22:59
 2026-07-30,5,NTAP,"NetApp, Inc.",173.07,173.98,0.53,2026-07-30 22:59
-2026-07-31,1,DDOG,"Datadog, Inc.",275.12,,,
-2026-07-31,2,HPE,Hewlett Packard Enterprise Comp,47.8,,,
-2026-07-31,3,DVA,DaVita Inc.,237.64,,,
-2026-07-31,4,NTAP,"NetApp, Inc.",175.22,,,
-2026-07-31,5,MPC,Marathon Petroleum Corporation,313.47,,,
+2026-07-31,1,DDOG,"Datadog, Inc.",275.12,267.97,-2.6,2026-07-31 22:55
+2026-07-31,2,HPE,Hewlett Packard Enterprise Comp,47.8,47.9,0.21,2026-07-31 22:55
+2026-07-31,3,DVA,DaVita Inc.,237.64,240.09,1.03,2026-07-31 22:55
+2026-07-31,4,NTAP,"NetApp, Inc.",175.22,178.5,1.87,2026-07-31 22:55
+2026-07-31,5,MPC,Marathon Petroleum Corporation,313.47,316.47,0.96,2026-07-31 22:55
