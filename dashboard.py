@@ -456,7 +456,10 @@ function niceTicks(lo, hi, n = 5) {
   if (lo === hi) { lo -= 1; hi += 1; }
   const span = hi - lo, step0 = span / n, mag = Math.pow(10, Math.floor(Math.log10(step0)));
   const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => span / s <= n) || 10 * mag;
-  const t = []; for (let v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) t.push(+v.toFixed(10));
+  // Floor the low and ceil the high to step multiples so the axis always
+  // brackets the data — recomputed each render, so it grows with new extremes.
+  const start = Math.floor(lo / step) * step, end = Math.ceil(hi / step) * step;
+  const t = []; for (let v = start; v <= end + 1e-9; v += step) t.push(+v.toFixed(10));
   return t;
 }
 function ttRow(tt, color, label, value, valCls) {
