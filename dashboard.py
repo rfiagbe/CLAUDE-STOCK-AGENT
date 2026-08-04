@@ -176,7 +176,19 @@ _TEMPLATE = r"""<!DOCTYPE html>
   /* ---- table ---- */
   .search { font: inherit; font-size: 13px; color: var(--ink); background: var(--page);
             border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px;
-            width: 240px; max-width: 100%; margin-top: 10px; }
+            width: 200px; max-width: 100%; }
+  .histctl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0 2px; }
+  .histctl .tabs { margin: 0; }
+  .histctl .search { margin-left: auto; }
+  .histsel { display: inline-flex; align-items: center; gap: 8px; }
+  .histsel[hidden] { display: none; }
+  .sel { font: inherit; font-size: 12.5px; font-weight: 600; color: var(--ink);
+         background-color: var(--surface); border: 1px solid var(--border);
+         border-radius: 6px; padding: 6px 30px 6px 12px; cursor: pointer;
+         -webkit-appearance: none; appearance: none;
+         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%238a919e' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+         background-repeat: no-repeat; background-position: right 10px center; }
+  .sel:hover { border-color: var(--baseline); }
   table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
   th { text-align: right; color: var(--muted); font-weight: 650; font-size: 10.5px;
        text-transform: uppercase; letter-spacing: 1.1px;
@@ -217,7 +229,9 @@ _TEMPLATE = r"""<!DOCTYPE html>
     .stat:nth-child(odd) { border-left: 0; }
     .stat:nth-child(-n+2) { border-top: 0; }
     .card { padding: 14px 14px 12px; }
-    .search { width: 100%; }
+    .histctl .search { margin-left: 0; width: 100%; }
+    .histsel { flex: 1 1 100%; }
+    .histsel .sel { flex: 1 1 auto; }
     td, th { padding: 6px 8px; }
     td .co { display: none; }   /* company name off on phones — ticker is enough */
   }
@@ -283,8 +297,23 @@ _TEMPLATE = r"""<!DOCTYPE html>
 
   <div class="card">
     <h2>Pick History</h2>
-    <div class="note">Every pick ever made, newest first — nothing is removed over time</div>
-    <input class="search" id="search" type="search" placeholder="Search ticker or company…" aria-label="Search picks">
+    <div class="note">Pick a single day or a range to view — defaults to the most recent trading day. Nothing is ever removed.</div>
+    <div class="histctl">
+      <div class="tabs" id="histMode" role="group" aria-label="History view">
+        <button data-m="day" class="on">Single day</button>
+        <button data-m="range">Range</button>
+        <button data-m="all">All days</button>
+      </div>
+      <div class="histsel" id="dayWrap">
+        <select class="sel" id="daySelect" aria-label="Select day"></select>
+      </div>
+      <div class="histsel" id="rangeWrap" hidden>
+        <select class="sel" id="fromSelect" aria-label="From day"></select>
+        <span class="mut">to</span>
+        <select class="sel" id="toSelect" aria-label="To day"></select>
+      </div>
+      <input class="search" id="search" type="search" placeholder="Search ticker…" aria-label="Search picks">
+    </div>
     <div id="tableWrap" style="overflow-x:auto;"></div>
   </div>
 
@@ -299,7 +328,7 @@ const PICKS = __PICKS__;
 const BENCH = __BENCH__;
 const SPY = Object.fromEntries(BENCH.map(b => [b.date, b]));
 
-const state = { range: "all", search: "" };
+const state = { range: "all", search: "", histMode: "day", histDay: null, histFrom: null, histTo: null };
 const fmtPct = v => (v >= 0 ? "+" : "") + v.toFixed(2) + "%";
 const arrowPct = v => (v > 0 ? "▲ " : v < 0 ? "▼ " : "— ") + fmtPct(v);
 const fmtUSD = v => "$" + Number(v).toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
@@ -673,9 +702,10 @@ function renderRank(days) {
 }
 
 /* ---------- History table ---------- */
-function renderTable(days) {
+function renderTable() {
   const wrap = document.getElementById("tableWrap");
   wrap.replaceChildren();
+  const days = historyDays();
   const q = state.search.trim().toLowerCase();
   const table = document.createElement("table");
   const thead = document.createElement("thead");
@@ -731,14 +761,42 @@ function renderTable(days) {
   table.append(tbody);
   if (!shown) {
     const e = document.createElement("div"); e.className = "empty";
-    e.textContent = "No picks match."; wrap.append(e);
+    e.textContent = !ALL_DATES.length ? "No picks recorded yet."
+      : q ? "No picks match your search in this selection."
+      : "No picks for the selected day(s).";
+    wrap.append(e);
   } else wrap.append(table);
+}
+
+/* ---------- Pick-history day selection (independent of the top range tabs) ---------- */
+const ALL_DAYS = dayGroups(PICKS);            // ascending by date
+const ALL_DATES = ALL_DAYS.map(d => d.date);  // ascending
+const LATEST = ALL_DATES.length ? ALL_DATES[ALL_DATES.length - 1] : null;
+state.histDay = LATEST; state.histFrom = LATEST; state.histTo = LATEST;
+const fmtDayOpt = dt => new Date(dt + "T12:00").toLocaleDateString("en-US",
+  { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+
+function historyDays() {
+  if (state.histMode === "all") return ALL_DAYS;
+  if (state.histMode === "day") return ALL_DAYS.filter(d => d.date === state.histDay);
+  let a = state.histFrom, b = state.histTo;
+  if (a && b && a > b) [a, b] = [b, a];
+  return ALL_DAYS.filter(d => d.date >= a && d.date <= b);
+}
+function fillSelect(sel, selected) {
+  sel.replaceChildren();
+  ALL_DATES.slice().reverse().forEach(dt => {   // newest first
+    const o = document.createElement("option");
+    o.value = dt; o.textContent = fmtDayOpt(dt);
+    if (dt === selected) o.selected = true;
+    sel.append(o);
+  });
 }
 
 /* ---------- Orchestration ---------- */
 function renderAll() {
   const days = dayGroups(filtered());
-  renderHero(days); renderCum(days); renderDaily(days); renderRank(days); renderTable(days);
+  renderHero(days); renderCum(days); renderDaily(days); renderRank(days); renderTable();
 }
 document.getElementById("filters").addEventListener("click", ev => {
   const b = ev.target.closest("button"); if (!b) return;
@@ -746,11 +804,25 @@ document.getElementById("filters").addEventListener("click", ev => {
   document.querySelectorAll("#filters button").forEach(x => x.classList.toggle("on", x === b));
   renderAll();
 });
-document.getElementById("search").addEventListener("input", ev => {
-  state.search = ev.target.value;
-  renderTable(dayGroups(filtered()));
+document.getElementById("histMode").addEventListener("click", ev => {
+  const b = ev.target.closest("button"); if (!b) return;
+  state.histMode = b.dataset.m;
+  document.querySelectorAll("#histMode button").forEach(x => x.classList.toggle("on", x === b));
+  document.getElementById("dayWrap").hidden = state.histMode !== "day";
+  document.getElementById("rangeWrap").hidden = state.histMode !== "range";
+  renderTable();
 });
+document.getElementById("daySelect").addEventListener("change", ev => { state.histDay = ev.target.value; renderTable(); });
+document.getElementById("fromSelect").addEventListener("change", ev => { state.histFrom = ev.target.value; renderTable(); });
+document.getElementById("toSelect").addEventListener("change", ev => { state.histTo = ev.target.value; renderTable(); });
+document.getElementById("search").addEventListener("input", ev => { state.search = ev.target.value; renderTable(); });
 let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderAll, 150); });
+
+if (LATEST) {
+  fillSelect(document.getElementById("daySelect"), state.histDay);
+  fillSelect(document.getElementById("fromSelect"), state.histFrom);
+  fillSelect(document.getElementById("toSelect"), state.histTo);
+}
 renderTape();
 renderAll();
 </script>
