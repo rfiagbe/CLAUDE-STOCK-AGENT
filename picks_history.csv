@@ -64,3 +64,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-08-04,3,PANW,"Palo Alto Networks, Inc.",364.25,366.34,0.57,2026-08-04 22:57
 2026-08-04,4,HPE,Hewlett Packard Enterprise Comp,51.3,52.39,2.12,2026-08-04 22:57
 2026-08-04,5,FTNT,"Fortinet, Inc.",167.82,168.29,0.28,2026-08-04 22:57
+2026-08-05,1,DELL,Dell Technologies Inc.,482.61,,,
+2026-08-05,2,DDOG,"Datadog, Inc.",287.64,,,
+2026-08-05,3,PANW,"Palo Alto Networks, Inc.",369.98,,,
+2026-08-05,4,HPE,Hewlett Packard Enterprise Comp,53.77,,,
+2026-08-05,5,FTNT,"Fortinet, Inc.",167.9,,,
