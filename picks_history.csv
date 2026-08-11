@@ -84,8 +84,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-08-10,3,HPE,Hewlett Packard Enterprise Comp,53.22,54.68,2.74,2026-08-10 22:31
 2026-08-10,4,CRWD,"CrowdStrike Holdings, Inc.",214.42,225.16,5.01,2026-08-10 22:31
 2026-08-10,5,NTAP,"NetApp, Inc.",189.52,198.72,4.85,2026-08-10 22:31
-2026-08-11,1,DELL,Dell Technologies Inc.,457.88,,,
-2026-08-11,2,PANW,"Palo Alto Networks, Inc.",385.04,,,
-2026-08-11,3,HPE,Hewlett Packard Enterprise Comp,54.68,,,
-2026-08-11,4,CRWD,"CrowdStrike Holdings, Inc.",225.16,,,
-2026-08-11,5,NTAP,"NetApp, Inc.",198.72,,,
+2026-08-11,1,DELL,Dell Technologies Inc.,457.88,440.97,-3.69,2026-08-11 22:35
+2026-08-11,2,PANW,"Palo Alto Networks, Inc.",385.04,383.8,-0.32,2026-08-11 22:35
+2026-08-11,3,HPE,Hewlett Packard Enterprise Comp,54.68,54.38,-0.55,2026-08-11 22:35
+2026-08-11,4,CRWD,"CrowdStrike Holdings, Inc.",225.16,221.9,-1.45,2026-08-11 22:35
+2026-08-11,5,NTAP,"NetApp, Inc.",198.72,198.47,-0.13,2026-08-11 22:35
