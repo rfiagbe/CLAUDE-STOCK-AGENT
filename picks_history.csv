@@ -99,3 +99,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-08-13,3,PANW,"Palo Alto Networks, Inc.",387.01,396.0,2.32,2026-08-13 22:35
 2026-08-13,4,NTAP,"NetApp, Inc.",202.05,204.99,1.46,2026-08-13 22:35
 2026-08-13,5,CRWD,"CrowdStrike Holdings, Inc.",221.78,225.53,1.69,2026-08-13 22:35
+2026-08-14,1,DELL,Dell Technologies Inc.,494.51,,,
+2026-08-14,2,HPE,Hewlett Packard Enterprise Comp,59.82,,,
+2026-08-14,3,PANW,"Palo Alto Networks, Inc.",396.0,,,
+2026-08-14,4,CRWD,"CrowdStrike Holdings, Inc.",225.53,,,
+2026-08-14,5,HPQ,HP Inc.,31.3,,,
