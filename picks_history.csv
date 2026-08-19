@@ -114,8 +114,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-08-18,3,PANW,"Palo Alto Networks, Inc.",384.27,374.14,-2.64,2026-08-18 22:16
 2026-08-18,4,MU,"Micron Technology, Inc.",971.66,940.76,-3.18,2026-08-18 22:16
 2026-08-18,5,CRWD,"CrowdStrike Holdings, Inc.",216.95,212.92,-1.86,2026-08-18 22:16
-2026-08-19,1,DELL,Dell Technologies Inc.,468.65,,,
-2026-08-19,2,HPE,Hewlett Packard Enterprise Comp,55.69,,,
-2026-08-19,3,NTAP,"NetApp, Inc.",204.71,,,
-2026-08-19,4,CRL,Charles River Laboratories Inte,279.19,,,
-2026-08-19,5,PANW,"Palo Alto Networks, Inc.",374.14,,,
+2026-08-19,1,DELL,Dell Technologies Inc.,468.65,437.55,-6.64,2026-08-19 22:18
+2026-08-19,2,HPE,Hewlett Packard Enterprise Comp,55.69,53.13,-4.6,2026-08-19 22:18
+2026-08-19,3,NTAP,"NetApp, Inc.",204.71,194.48,-5.0,2026-08-19 22:18
+2026-08-19,4,CRL,Charles River Laboratories Inte,279.19,290.0,3.87,2026-08-19 22:18
+2026-08-19,5,PANW,"Palo Alto Networks, Inc.",374.14,359.76,-3.84,2026-08-19 22:18
