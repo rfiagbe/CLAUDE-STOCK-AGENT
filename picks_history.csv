@@ -119,3 +119,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-08-19,3,NTAP,"NetApp, Inc.",204.71,194.48,-5.0,2026-08-19 22:18
 2026-08-19,4,CRL,Charles River Laboratories Inte,279.19,290.0,3.87,2026-08-19 22:18
 2026-08-19,5,PANW,"Palo Alto Networks, Inc.",374.14,359.76,-3.84,2026-08-19 22:18
+2026-08-20,1,CRL,Charles River Laboratories Inte,290.0,,,
+2026-08-20,2,HPE,Hewlett Packard Enterprise Comp,53.13,,,
+2026-08-20,3,MRVL,"Marvell Technology, Inc.",237.27,,,
+2026-08-20,4,NTAP,"NetApp, Inc.",194.48,,,
+2026-08-20,5,PANW,"Palo Alto Networks, Inc.",359.76,,,
