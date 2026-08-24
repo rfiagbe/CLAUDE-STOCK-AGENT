@@ -129,3 +129,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-08-21,3,CRL,Charles River Laboratories Inte,291.45,295.19,1.28,2026-08-21 22:17
 2026-08-21,4,HPE,Hewlett Packard Enterprise Comp,52.89,53.45,1.06,2026-08-21 22:17
 2026-08-21,5,NTAP,"NetApp, Inc.",192.81,192.27,-0.28,2026-08-21 22:17
+2026-08-24,1,MRNA,"Moderna, Inc.",145.13,,,
+2026-08-24,2,HPE,Hewlett Packard Enterprise Comp,53.45,,,
+2026-08-24,3,MRVL,"Marvell Technology, Inc.",237.04,,,
+2026-08-24,4,IQV,"IQVIA Holdings, Inc.",259.82,,,
+2026-08-24,5,EXPE,"Expedia Group, Inc.",321.63,,,
