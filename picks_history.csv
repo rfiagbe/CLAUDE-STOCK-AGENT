@@ -134,3 +134,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-08-24,3,MRVL,"Marvell Technology, Inc.",237.04,229.29,-3.27,2026-08-24 22:19
 2026-08-24,4,IQV,"IQVIA Holdings, Inc.",259.82,260.24,0.16,2026-08-24 22:19
 2026-08-24,5,EXPE,"Expedia Group, Inc.",321.63,339.12,5.44,2026-08-24 22:19
+2026-08-25,1,MRNA,"Moderna, Inc.",138.89,,,
+2026-08-25,2,IQV,"IQVIA Holdings, Inc.",260.24,,,
+2026-08-25,3,EXPE,"Expedia Group, Inc.",339.13,,,
+2026-08-25,4,MPC,Marathon Petroleum Corporation,362.52,,,
+2026-08-25,5,ZBRA,Zebra Technologies Corporation,363.3,,,
