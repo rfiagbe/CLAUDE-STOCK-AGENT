@@ -139,3 +139,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-08-25,3,EXPE,"Expedia Group, Inc.",339.13,337.97,-0.34,2026-08-25 22:20
 2026-08-25,4,MPC,Marathon Petroleum Corporation,362.52,354.88,-2.11,2026-08-25 22:20
 2026-08-25,5,ZBRA,Zebra Technologies Corporation,363.3,360.52,-0.77,2026-08-25 22:20
+2026-08-26,1,MRNA,"Moderna, Inc.",158.83,,,
+2026-08-26,2,DELL,Dell Technologies Inc.,451.5,,,
+2026-08-26,3,MRVL,"Marvell Technology, Inc.",240.38,,,
+2026-08-26,4,HPE,Hewlett Packard Enterprise Comp,53.44,,,
+2026-08-26,5,MPC,Marathon Petroleum Corporation,354.88,,,
