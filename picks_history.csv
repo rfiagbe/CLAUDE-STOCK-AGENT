@@ -144,3 +144,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-08-26,3,MRVL,"Marvell Technology, Inc.",240.38,245.11,1.97,2026-08-27 02:48
 2026-08-26,4,HPE,Hewlett Packard Enterprise Comp,53.44,55.23,3.35,2026-08-27 02:48
 2026-08-26,5,MPC,Marathon Petroleum Corporation,354.88,362.27,2.08,2026-08-27 02:48
+2026-08-27,1,MRNA,"Moderna, Inc.",142.77,,,
+2026-08-27,2,DELL,Dell Technologies Inc.,472.26,,,
+2026-08-27,3,MRVL,"Marvell Technology, Inc.",241.45,,,
+2026-08-27,4,PANW,"Palo Alto Networks, Inc.",382.85,,,
+2026-08-27,5,CRWD,"CrowdStrike Holdings, Inc.",227.96,,,
