@@ -149,3 +149,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-08-27,3,MRVL,"Marvell Technology, Inc.",241.45,241.45,-0.0,2026-08-28 05:54
 2026-08-27,4,PANW,"Palo Alto Networks, Inc.",382.85,382.85,0.0,2026-08-28 05:54
 2026-08-27,5,CRWD,"CrowdStrike Holdings, Inc.",227.96,227.96,0.0,2026-08-28 05:54
+2026-08-28,1,MRNA,"Moderna, Inc.",137.99,,,
+2026-08-28,2,CRL,Charles River Laboratories Inte,291.5,,,
+2026-08-28,3,PANW,"Palo Alto Networks, Inc.",371.59,,,
+2026-08-28,4,MPC,Marathon Petroleum Corporation,368.83,,,
+2026-08-28,5,VEEV,Veeva Systems Inc.,276.69,,,
