@@ -169,8 +169,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-09-02,3,VEEV,Veeva Systems Inc.,278.23,280.72,0.89,2026-09-02 23:46
 2026-09-02,4,HUM,Humana Inc.,398.9,400.97,0.52,2026-09-02 23:46
 2026-09-02,5,VLO,Valero Energy Corporation,365.81,366.09,0.08,2026-09-02 23:46
-2026-09-03,1,MRNA,"Moderna, Inc.",143.93,,,
-2026-09-03,2,DELL,Dell Technologies Inc.,522.63,,,
-2026-09-03,3,CRL,Charles River Laboratories Inte,290.93,,,
-2026-09-03,4,VEEV,Veeva Systems Inc.,279.77,,,
-2026-09-03,5,HUM,Humana Inc.,411.97,,,
+2026-09-03,1,MRNA,"Moderna, Inc.",143.93,148.87,3.43,2026-09-03 23:44
+2026-09-03,2,DELL,Dell Technologies Inc.,522.63,516.39,-1.19,2026-09-03 23:44
+2026-09-03,3,CRL,Charles River Laboratories Inte,290.93,293.35,0.83,2026-09-03 23:44
+2026-09-03,4,VEEV,Veeva Systems Inc.,279.77,284.38,1.65,2026-09-03 23:44
+2026-09-03,5,HUM,Humana Inc.,411.97,406.52,-1.32,2026-09-03 23:44
