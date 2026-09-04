@@ -174,3 +174,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-09-03,3,CRL,Charles River Laboratories Inte,290.93,293.35,0.83,2026-09-03 23:44
 2026-09-03,4,VEEV,Veeva Systems Inc.,279.77,284.38,1.65,2026-09-03 23:44
 2026-09-03,5,HUM,Humana Inc.,411.97,406.52,-1.32,2026-09-03 23:44
+2026-09-04,1,MRNA,"Moderna, Inc.",144.6,,,
+2026-09-04,2,DELL,Dell Technologies Inc.,518.23,,,
+2026-09-04,3,SNDK,Sandisk Corporation,1687.56,,,
+2026-09-04,4,VEEV,Veeva Systems Inc.,275.65,,,
+2026-09-04,5,CRL,Charles River Laboratories Inte,289.81,,,
