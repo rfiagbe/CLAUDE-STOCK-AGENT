@@ -179,3 +179,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-09-04,3,SNDK,Sandisk Corporation,1687.56,1740.0,3.11,2026-09-04 23:38
 2026-09-04,4,VEEV,Veeva Systems Inc.,275.65,275.09,-0.2,2026-09-04 23:38
 2026-09-04,5,CRL,Charles River Laboratories Inte,289.81,288.5,-0.45,2026-09-04 23:38
+2026-09-07,1,MRNA,"Moderna, Inc.",145.55,,,
+2026-09-07,2,DELL,Dell Technologies Inc.,524.14,,,
+2026-09-07,3,SNDK,Sandisk Corporation,1740.0,,,
+2026-09-07,4,MU,"Micron Technology, Inc.",1016.59,,,
+2026-09-07,5,VEEV,Veeva Systems Inc.,275.09,,,
