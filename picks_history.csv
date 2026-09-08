@@ -184,8 +184,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-09-07,3,SNDK,Sandisk Corporation,1740.0,1740.0,0.0,2026-09-07 23:53
 2026-09-07,4,MU,"Micron Technology, Inc.",1016.59,1016.59,0.0,2026-09-07 23:53
 2026-09-07,5,VEEV,Veeva Systems Inc.,275.09,275.09,-0.0,2026-09-07 23:53
-2026-09-08,1,MRNA,"Moderna, Inc.",144.52,,,
-2026-09-08,2,DELL,Dell Technologies Inc.,528.84,,,
-2026-09-08,3,SNDK,Sandisk Corporation,1800.54,,,
-2026-09-08,4,HPE,Hewlett Packard Enterprise Comp,55.2,,,
-2026-09-08,5,MU,"Micron Technology, Inc.",1026.01,,,
+2026-09-08,1,MRNA,"Moderna, Inc.",144.52,140.33,-2.9,2026-09-08 23:47
+2026-09-08,2,DELL,Dell Technologies Inc.,528.84,533.88,0.95,2026-09-08 23:47
+2026-09-08,3,SNDK,Sandisk Corporation,1800.54,1737.99,-3.47,2026-09-08 23:47
+2026-09-08,4,HPE,Hewlett Packard Enterprise Comp,55.2,56.03,1.5,2026-09-08 23:47
+2026-09-08,5,MU,"Micron Technology, Inc.",1026.01,1000.26,-2.51,2026-09-08 23:47
