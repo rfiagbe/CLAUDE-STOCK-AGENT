@@ -204,8 +204,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-09-11,3,HPE,Hewlett Packard Enterprise Comp,60.22,62.09,3.11,2026-09-11 23:48
 2026-09-11,4,HPQ,HP Inc.,34.66,35.48,2.37,2026-09-11 23:48
 2026-09-11,5,HUM,Humana Inc.,406.58,409.8,0.79,2026-09-11 23:48
-2026-09-14,1,MRNA,"Moderna, Inc.",146.42,,,
-2026-09-14,2,DELL,Dell Technologies Inc.,542.71,,,
-2026-09-14,3,CRWD,"CrowdStrike Holdings, Inc.",238.72,,,
-2026-09-14,4,MPC,Marathon Petroleum Corporation,392.35,,,
-2026-09-14,5,HPE,Hewlett Packard Enterprise Comp,56.9,,,
+2026-09-14,1,MRNA,"Moderna, Inc.",146.42,143.97,-1.67,2026-09-15 00:10
+2026-09-14,2,DELL,Dell Technologies Inc.,542.71,567.29,4.53,2026-09-15 00:10
+2026-09-14,3,CRWD,"CrowdStrike Holdings, Inc.",238.72,206.74,-13.4,2026-09-15 00:10
+2026-09-14,4,MPC,Marathon Petroleum Corporation,392.35,395.93,0.91,2026-09-15 00:10
+2026-09-14,5,HPE,Hewlett Packard Enterprise Comp,56.9,62.09,9.12,2026-09-15 00:10
