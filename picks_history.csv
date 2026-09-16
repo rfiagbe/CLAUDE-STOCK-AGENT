@@ -214,3 +214,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-09-15,3,CRWD,"CrowdStrike Holdings, Inc.",240.53,242.49,0.81,2026-09-15 23:53
 2026-09-15,4,VLO,Valero Energy Corporation,391.53,397.04,1.41,2026-09-15 23:53
 2026-09-15,5,CRM,"Salesforce, Inc.",261.31,255.65,-2.17,2026-09-15 23:53
+2026-09-16,1,MRNA,"Moderna, Inc.",146.61,,,
+2026-09-16,2,DELL,Dell Technologies Inc.,570.34,,,
+2026-09-16,3,CRWD,"CrowdStrike Holdings, Inc.",242.54,,,
+2026-09-16,4,HPE,Hewlett Packard Enterprise Comp,57.73,,,
+2026-09-16,5,RVTY,"Revvity, Inc.",145.38,,,
