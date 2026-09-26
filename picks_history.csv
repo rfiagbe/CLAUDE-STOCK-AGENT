@@ -249,8 +249,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-09-24,3,DELL,Dell Technologies Inc.,533.89,549.83,2.99,2026-09-25 00:12
 2026-09-24,4,AMD,"Advanced Micro Devices, Inc.",619.7,614.61,-0.82,2026-09-25 00:12
 2026-09-24,5,P,"Everpure, Inc.",129.49,109.65,-15.32,2026-09-25 00:12
-2026-09-25,1,DELL,Dell Technologies Inc.,571.39,,,
-2026-09-25,2,AMD,"Advanced Micro Devices, Inc.",630.22,,,
-2026-09-25,3,P,"Everpure, Inc.",126.79,,,
-2026-09-25,4,HPE,Hewlett Packard Enterprise Comp,63.99,,,
-2026-09-25,5,CRWD,"CrowdStrike Holdings, Inc.",255.28,,,
+2026-09-25,1,DELL,Dell Technologies Inc.,571.39,536.02,-6.19,2026-09-26 00:19
+2026-09-25,2,AMD,"Advanced Micro Devices, Inc.",630.22,629.26,-0.15,2026-09-26 00:19
+2026-09-25,3,P,"Everpure, Inc.",126.79,121.88,-3.87,2026-09-26 00:19
+2026-09-25,4,HPE,Hewlett Packard Enterprise Comp,63.99,63.52,-0.73,2026-09-26 00:19
+2026-09-25,5,CRWD,"CrowdStrike Holdings, Inc.",255.28,259.67,1.72,2026-09-26 00:19
