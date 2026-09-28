@@ -2,7 +2,7 @@
 
 Claude stock agent that sends me daily stock picks.
 
-Every weekday morning (before US market open), this agent:
+Every weekday at **9:00 AM ET** (before the 9:30 open), this agent:
 
 1. Pulls the current S&P 500 ticker list and a year of daily price history.
 2. Filters for liquid names in uptrends: price above the 20- and 50-day
@@ -75,7 +75,8 @@ and can be revoked anytime — it is not your real password).
 | `picks_history.csv` | One row per pick per day: pick price, close, day change % |
 | `benchmark_history.csv` | S&P 500 (SPY) close and day change per tracked date |
 | `backups/` | Rolling monthly copies of both CSVs |
-| `run_agent.bat` / `run_eod.bat` | What Task Scheduler runs; output goes to `task_run.log` |
+| `run_morning.ps1` | What the 9:00 AM ET Task Scheduler job runs; output goes to `task_run.log` |
+| `run_agent.bat` / `run_eod.bat` | Older local runners (EOD task disabled; GitHub handles EOD) |
 | `.env` | Your email credentials (never share or commit this) |
 | `agent.log` / `task_run.log` | Run history for troubleshooting |
 
@@ -87,13 +88,28 @@ python stock_agent.py --top 10     # email 10 picks instead of 5
 python eod_update.py --dry-run     # fill in closes in the CSV, no email
 schtasks /run /tn "Daily Stock Picks"      # trigger the morning job right now
 schtasks /run /tn "Daily Stock Picks EOD"  # trigger the evening update right now
-schtasks /change /tn "Daily Stock Picks" /st 07:00       # change the morning time
+schtasks /change /tn "Daily Stock Picks" /st 09:00       # change the morning time
 schtasks /change /tn "Daily Stock Picks EOD" /st 18:00   # change the evening time
 schtasks /delete /tn "Daily Stock Picks" /f              # remove a schedule
 ```
 
-Note: the PC must be awake at 8:30 AM for the task to fire; if it was off,
-Task Scheduler skips that day.
+## Scheduling
+
+- **Morning email — 9:00 AM ET, Windows Task Scheduler** (`Daily Stock Picks`
+  → `run_morning.ps1`). It pulls the latest data, runs the screen, emails, and
+  pushes the updated CSV/dashboard to GitHub. The task wakes the PC from sleep
+  and, if the PC was off at 9:00, runs as soon as it's back on. The PC's
+  timezone is Eastern, so 9:00 stays 9:00 ET across daylight-saving changes.
+- **Morning fallback — GitHub Actions** (`morning-picks.yml`). GitHub's
+  schedule trigger ran 41 min to ~10 h late (median over 4 h in Sep 2026), so
+  it can't deliver a fixed-time email. It now runs mid-morning and skips any
+  day the 9:00 AM local run already recorded picks, so it only sends when the
+  PC missed the day. The "Run workflow" button still sends on demand.
+- **EOD update — GitHub Actions** (`eod-update.yml`), unchanged. The
+  `Daily Stock Picks EOD` Windows task stays disabled to avoid duplicates.
+
+`powershell -File run_morning.ps1 -DryRun` tests the full morning path without
+sending email, writing the CSV, or pushing. Its output goes to `task_run.log`.
 
 ## Adjusting the strategy
 
