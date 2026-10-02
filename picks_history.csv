@@ -269,8 +269,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-09-30,3,HPE,Hewlett Packard Enterprise Comp,64.98,61.49,-5.37,2026-10-01 01:00
 2026-09-30,4,P,"Everpure, Inc.",131.22,130.05,-0.89,2026-10-01 01:00
 2026-09-30,5,CRWD,"CrowdStrike Holdings, Inc.",265.33,262.74,-0.98,2026-10-01 01:00
-2026-10-01,1,MRNA,"Moderna, Inc.",192.57,,,
-2026-10-01,2,P,"Everpure, Inc.",130.78,,,
-2026-10-01,3,HPE,Hewlett Packard Enterprise Comp,63.89,,,
-2026-10-01,4,CRWD,"CrowdStrike Holdings, Inc.",264.75,,,
-2026-10-01,5,AMD,"Advanced Micro Devices, Inc.",611.76,,,
+2026-10-01,1,MRNA,"Moderna, Inc.",192.57,192.57,0.0,2026-10-02 01:14
+2026-10-01,2,P,"Everpure, Inc.",130.78,130.78,-0.0,2026-10-02 01:14
+2026-10-01,3,HPE,Hewlett Packard Enterprise Comp,63.89,63.89,-0.0,2026-10-02 01:14
+2026-10-01,4,CRWD,"CrowdStrike Holdings, Inc.",264.75,264.75,0.0,2026-10-02 01:14
+2026-10-01,5,AMD,"Advanced Micro Devices, Inc.",611.76,611.76,0.0,2026-10-02 01:14
