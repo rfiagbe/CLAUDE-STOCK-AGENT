@@ -294,3 +294,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-10-07,3,CRWD,"CrowdStrike Holdings, Inc.",278.86,278.86,-0.0,2026-10-08 01:30
 2026-10-07,4,DELL,Dell Technologies Inc.,574.0,574.0,0.0,2026-10-08 01:30
 2026-10-07,5,AMD,"Advanced Micro Devices, Inc.",649.42,649.42,-0.0,2026-10-08 01:30
+2026-10-08,1,MRNA,"Moderna, Inc.",196.42,,,
+2026-10-08,2,HPE,Hewlett Packard Enterprise Comp,72.09,,,
+2026-10-08,3,DELL,Dell Technologies Inc.,578.96,,,
+2026-10-08,4,CRWD,"CrowdStrike Holdings, Inc.",265.44,,,
+2026-10-08,5,AMD,"Advanced Micro Devices, Inc.",645.86,,,
