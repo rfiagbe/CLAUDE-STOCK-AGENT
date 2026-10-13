@@ -309,3 +309,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-10-12,3,DELL,Dell Technologies Inc.,576.76,576.76,0.0,2026-10-13 02:48
 2026-10-12,4,ILMN,"Illumina, Inc.",276.67,276.67,0.0,2026-10-13 02:48
 2026-10-12,5,CRWD,"CrowdStrike Holdings, Inc.",263.01,263.01,0.0,2026-10-13 02:48
+2026-10-13,1,MRNA,"Moderna, Inc.",216.25,,,
+2026-10-13,2,DELL,Dell Technologies Inc.,572.47,,,
+2026-10-13,3,HPE,Hewlett Packard Enterprise Comp,68.81,,,
+2026-10-13,4,CRWD,"CrowdStrike Holdings, Inc.",261.21,,,
+2026-10-13,5,ILMN,"Illumina, Inc.",271.17,,,
