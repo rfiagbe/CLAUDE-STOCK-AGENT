@@ -314,8 +314,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-10-13,3,HPE,Hewlett Packard Enterprise Comp,68.81,70.33,2.21,2026-10-14 00:48
 2026-10-13,4,CRWD,"CrowdStrike Holdings, Inc.",261.21,263.01,0.69,2026-10-14 00:48
 2026-10-13,5,ILMN,"Illumina, Inc.",271.17,276.67,2.03,2026-10-14 00:48
-2026-10-14,1,MRNA,"Moderna, Inc.",224.2,,,
-2026-10-14,2,P,"Everpure, Inc.",142.23,,,
-2026-10-14,3,NTAP,"NetApp, Inc.",222.72,,,
-2026-10-14,4,ILMN,"Illumina, Inc.",268.29,,,
-2026-10-14,5,VEEV,Veeva Systems Inc.,294.73,,,
+2026-10-14,1,MRNA,"Moderna, Inc.",224.2,216.25,-3.55,2026-10-15 00:15
+2026-10-14,2,P,"Everpure, Inc.",142.23,156.97,10.36,2026-10-15 00:15
+2026-10-14,3,NTAP,"NetApp, Inc.",222.72,239.01,7.31,2026-10-15 00:15
+2026-10-14,4,ILMN,"Illumina, Inc.",268.29,271.18,1.08,2026-10-15 00:15
+2026-10-14,5,VEEV,Veeva Systems Inc.,294.73,301.63,2.34,2026-10-15 00:15
