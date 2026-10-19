@@ -329,3 +329,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-10-16,3,VEEV,Veeva Systems Inc.,307.2,313.03,1.9,2026-10-17 00:06
 2026-10-16,4,VLO,Valero Energy Corporation,445.95,444.06,-0.42,2026-10-17 00:06
 2026-10-16,5,PSX,Phillips 66,293.02,289.2,-1.3,2026-10-17 00:06
+2026-10-19,1,MRNA,"Moderna, Inc.",226.75,,,
+2026-10-19,2,VEEV,Veeva Systems Inc.,317.38,,,
+2026-10-19,3,MPC,Marathon Petroleum Corporation,474.47,,,
+2026-10-19,4,VLO,Valero Energy Corporation,433.22,,,
+2026-10-19,5,PSX,Phillips 66,290.74,,,
