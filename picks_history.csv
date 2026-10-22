@@ -339,8 +339,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-10-20,3,MPC,Marathon Petroleum Corporation,474.14,473.69,-0.09,2026-10-21 00:20
 2026-10-20,4,VLO,Valero Energy Corporation,432.81,433.31,0.12,2026-10-21 00:20
 2026-10-20,5,PSX,Phillips 66,291.08,290.55,-0.18,2026-10-21 00:20
-2026-10-21,1,MRNA,"Moderna, Inc.",251.38,,,
-2026-10-21,2,VEEV,Veeva Systems Inc.,319.0,,,
-2026-10-21,3,MPC,Marathon Petroleum Corporation,467.51,,,
-2026-10-21,4,ILMN,"Illumina, Inc.",285.54,,,
-2026-10-21,5,VLO,Valero Energy Corporation,431.64,,,
+2026-10-21,1,MRNA,"Moderna, Inc.",251.38,242.08,-3.7,2026-10-22 00:21
+2026-10-21,2,VEEV,Veeva Systems Inc.,319.0,318.67,-0.1,2026-10-22 00:21
+2026-10-21,3,MPC,Marathon Petroleum Corporation,467.51,475.04,1.61,2026-10-22 00:21
+2026-10-21,4,ILMN,"Illumina, Inc.",285.54,267.93,-6.17,2026-10-22 00:21
+2026-10-21,5,VLO,Valero Energy Corporation,431.64,433.42,0.41,2026-10-22 00:21
