@@ -344,3 +344,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-10-21,3,MPC,Marathon Petroleum Corporation,467.51,475.04,1.61,2026-10-22 00:21
 2026-10-21,4,ILMN,"Illumina, Inc.",285.54,267.93,-6.17,2026-10-22 00:21
 2026-10-21,5,VLO,Valero Energy Corporation,431.64,433.42,0.41,2026-10-22 00:21
+2026-10-22,1,MPC,Marathon Petroleum Corporation,459.02,,,
+2026-10-22,2,RVTY,"Revvity, Inc.",156.53,,,
+2026-10-22,3,NOW,"ServiceNow, Inc.",156.38,,,
+2026-10-22,4,PSX,Phillips 66,282.41,,,
+2026-10-22,5,WDAY,"Workday, Inc.",207.81,,,
