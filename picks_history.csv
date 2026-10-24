@@ -349,8 +349,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-10-22,3,NOW,"ServiceNow, Inc.",156.38,153.12,-2.08,2026-10-23 00:21
 2026-10-22,4,PSX,Phillips 66,282.41,290.07,2.71,2026-10-23 00:21
 2026-10-22,5,WDAY,"Workday, Inc.",207.81,202.96,-2.33,2026-10-23 00:21
-2026-10-23,1,MPC,Marathon Petroleum Corporation,457.89,,,
-2026-10-23,2,CRL,Charles River Laboratories Inte,346.29,,,
-2026-10-23,3,ACN,Accenture plc,247.27,,,
-2026-10-23,4,RVTY,"Revvity, Inc.",158.38,,,
-2026-10-23,5,IT,"Gartner, Inc.",231.96,,,
+2026-10-23,1,MPC,Marathon Petroleum Corporation,457.89,459.28,0.3,2026-10-24 00:11
+2026-10-23,2,CRL,Charles River Laboratories Inte,346.29,339.66,-1.91,2026-10-24 00:11
+2026-10-23,3,ACN,Accenture plc,247.27,258.74,4.64,2026-10-24 00:11
+2026-10-23,4,RVTY,"Revvity, Inc.",158.38,157.36,-0.64,2026-10-24 00:11
+2026-10-23,5,IT,"Gartner, Inc.",231.96,234.44,1.07,2026-10-24 00:11
