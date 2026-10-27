@@ -354,8 +354,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-10-23,3,ACN,Accenture plc,247.27,258.74,4.64,2026-10-24 00:11
 2026-10-23,4,RVTY,"Revvity, Inc.",158.38,157.36,-0.64,2026-10-24 00:11
 2026-10-23,5,IT,"Gartner, Inc.",231.96,234.44,1.07,2026-10-24 00:11
-2026-10-26,1,MPC,Marathon Petroleum Corporation,469.65,,,
-2026-10-26,2,VEEV,Veeva Systems Inc.,318.35,,,
-2026-10-26,3,CRWD,"CrowdStrike Holdings, Inc.",261.49,,,
-2026-10-26,4,RVTY,"Revvity, Inc.",160.16,,,
-2026-10-26,5,ACN,Accenture plc,247.46,,,
+2026-10-26,1,MPC,Marathon Petroleum Corporation,469.65,457.22,-2.65,2026-10-27 01:02
+2026-10-26,2,VEEV,Veeva Systems Inc.,318.35,323.04,1.47,2026-10-27 01:02
+2026-10-26,3,CRWD,"CrowdStrike Holdings, Inc.",261.49,257.57,-1.5,2026-10-27 01:02
+2026-10-26,4,RVTY,"Revvity, Inc.",160.16,158.77,-0.87,2026-10-27 01:02
+2026-10-26,5,ACN,Accenture plc,247.46,249.37,0.77,2026-10-27 01:02
