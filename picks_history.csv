@@ -359,8 +359,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-10-26,3,CRWD,"CrowdStrike Holdings, Inc.",261.49,257.57,-1.5,2026-10-27 01:02
 2026-10-26,4,RVTY,"Revvity, Inc.",160.16,158.77,-0.87,2026-10-27 01:02
 2026-10-26,5,ACN,Accenture plc,247.46,249.37,0.77,2026-10-27 01:02
-2026-10-27,1,P,"Everpure, Inc.",138.38,,,
-2026-10-27,2,CRWD,"CrowdStrike Holdings, Inc.",267.27,,,
-2026-10-27,3,VEEV,Veeva Systems Inc.,313.14,,,
-2026-10-27,4,ILMN,"Illumina, Inc.",279.99,,,
-2026-10-27,5,RVTY,"Revvity, Inc.",161.57,,,
+2026-10-27,1,P,"Everpure, Inc.",138.38,131.33,-5.09,2026-10-28 00:53
+2026-10-27,2,CRWD,"CrowdStrike Holdings, Inc.",267.27,261.83,-2.04,2026-10-28 00:53
+2026-10-27,3,VEEV,Veeva Systems Inc.,313.14,318.18,1.61,2026-10-28 00:53
+2026-10-27,4,ILMN,"Illumina, Inc.",279.99,271.04,-3.2,2026-10-28 00:53
+2026-10-27,5,RVTY,"Revvity, Inc.",161.57,160.39,-0.73,2026-10-28 00:53
