@@ -364,8 +364,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-10-27,3,VEEV,Veeva Systems Inc.,313.14,318.18,1.61,2026-10-28 00:53
 2026-10-27,4,ILMN,"Illumina, Inc.",279.99,271.04,-3.2,2026-10-28 00:53
 2026-10-27,5,RVTY,"Revvity, Inc.",161.57,160.39,-0.73,2026-10-28 00:53
-2026-10-28,1,MRNA,"Moderna, Inc.",213.63,,,
-2026-10-28,2,P,"Everpure, Inc.",140.39,,,
-2026-10-28,3,VEEV,Veeva Systems Inc.,316.8,,,
+2026-10-28,1,MRNA,"Moderna, Inc.",213.63,207.97,-2.65,2026-10-29 01:28
+2026-10-28,2,P,"Everpure, Inc.",140.39,138.73,-1.18,2026-10-29 01:28
+2026-10-28,3,VEEV,Veeva Systems Inc.,316.8,313.46,-1.05,2026-10-29 01:28
 2026-10-28,4,CRWD,"CrowdStrike Holdings, Inc.",268.55,,,
-2026-10-28,5,ILMN,"Illumina, Inc.",287.77,,,
+2026-10-28,5,ILMN,"Illumina, Inc.",287.77,279.47,-2.88,2026-10-29 01:28
