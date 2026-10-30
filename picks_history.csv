@@ -367,10 +367,10 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-10-28,1,MRNA,"Moderna, Inc.",213.63,207.97,-2.65,2026-10-29 01:28
 2026-10-28,2,P,"Everpure, Inc.",140.39,138.73,-1.18,2026-10-29 01:28
 2026-10-28,3,VEEV,Veeva Systems Inc.,316.8,313.46,-1.05,2026-10-29 01:28
-2026-10-28,4,CRWD,"CrowdStrike Holdings, Inc.",268.55,,,
+2026-10-28,4,CRWD,"CrowdStrike Holdings, Inc.",268.55,266.66,-0.7,2026-10-30 01:29
 2026-10-28,5,ILMN,"Illumina, Inc.",287.77,279.47,-2.88,2026-10-29 01:28
-2026-10-29,1,MRNA,"Moderna, Inc.",221.14,,,
-2026-10-29,2,ILMN,"Illumina, Inc.",287.75,,,
-2026-10-29,3,RVTY,"Revvity, Inc.",165.01,,,
-2026-10-29,4,VEEV,Veeva Systems Inc.,310.89,,,
-2026-10-29,5,CRWD,"CrowdStrike Holdings, Inc.",258.26,,,
+2026-10-29,1,MRNA,"Moderna, Inc.",221.14,214.16,-3.15,2026-10-30 01:29
+2026-10-29,2,ILMN,"Illumina, Inc.",287.75,288.79,0.36,2026-10-30 01:29
+2026-10-29,3,RVTY,"Revvity, Inc.",165.01,165.33,0.19,2026-10-30 01:29
+2026-10-29,4,VEEV,Veeva Systems Inc.,310.89,317.82,2.23,2026-10-30 01:29
+2026-10-29,5,CRWD,"CrowdStrike Holdings, Inc.",258.26,266.66,3.25,2026-10-30 01:29
