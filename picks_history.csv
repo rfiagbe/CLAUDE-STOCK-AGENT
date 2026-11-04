@@ -379,13 +379,13 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-10-30,3,VEEV,Veeva Systems Inc.,310.93,310.34,-0.19,2026-10-31 01:21
 2026-10-30,4,ACN,Accenture plc,258.6,247.22,-4.4,2026-10-31 01:21
 2026-10-30,5,APA,APA Corporation,52.41,51.51,-1.72,2026-10-31 01:21
-2026-11-02,1,MRNA,"Moderna, Inc.",221.72,,,
+2026-11-02,1,MRNA,"Moderna, Inc.",221.72,220.83,-0.4,2026-11-04 01:49
 2026-11-02,2,CRL,Charles River Laboratories Inte,359.41,338.54,-5.81,2026-11-03 03:15
 2026-11-02,3,VEEV,Veeva Systems Inc.,312.96,307.0,-1.9,2026-11-03 03:15
 2026-11-02,4,ACN,Accenture plc,258.24,260.94,1.05,2026-11-03 03:15
 2026-11-02,5,RVTY,"Revvity, Inc.",157.0,151.6,-3.44,2026-11-03 03:15
-2026-11-03,1,MRNA,"Moderna, Inc.",226.05,,,
-2026-11-03,2,ACN,Accenture plc,254.24,,,
+2026-11-03,1,MRNA,"Moderna, Inc.",226.05,220.83,-2.31,2026-11-04 01:49
+2026-11-03,2,ACN,Accenture plc,254.24,260.94,2.64,2026-11-04 01:49
 2026-11-03,3,CRL,Charles River Laboratories Inte,351.71,,,
-2026-11-03,4,RVTY,"Revvity, Inc.",166.79,,,
-2026-11-03,5,FDS,FactSet Research Systems Inc.,332.54,,,
+2026-11-03,4,RVTY,"Revvity, Inc.",166.79,151.6,-9.11,2026-11-04 01:49
+2026-11-03,5,FDS,FactSet Research Systems Inc.,332.54,343.74,3.37,2026-11-04 01:49
