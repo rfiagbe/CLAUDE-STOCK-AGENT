@@ -394,3 +394,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-11-04,3,VEEV,Veeva Systems Inc.,311.12,303.21,-2.54,2026-11-05 01:56
 2026-11-04,4,BBY,"Best Buy Co., Inc.",101.04,93.87,-7.1,2026-11-05 01:56
 2026-11-04,5,RVTY,"Revvity, Inc.",161.55,163.48,1.19,2026-11-05 01:56
+2026-11-05,1,MRNA,"Moderna, Inc.",241.46,,,
+2026-11-05,2,ACN,Accenture plc,265.25,,,
+2026-11-05,3,BBY,"Best Buy Co., Inc.",99.39,,,
+2026-11-05,4,TYL,"Tyler Technologies, Inc.",430.29,,,
+2026-11-05,5,FDS,FactSet Research Systems Inc.,340.47,,,
