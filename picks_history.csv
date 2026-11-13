@@ -424,3 +424,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-11-12,3,CDW,CDW Corporation,172.79,173.08,0.17,2026-11-13 02:19
 2026-11-12,4,ROP,"Roper Technologies, Inc.",477.87,,,
 2026-11-12,5,MTD,"Mettler-Toledo International, I",1730.93,1749.01,1.04,2026-11-13 02:19
+2026-11-13,1,BBY,"Best Buy Co., Inc.",104.12,,,
+2026-11-13,2,CDW,CDW Corporation,171.92,,,
+2026-11-13,3,ROP,"Roper Technologies, Inc.",480.26,,,
+2026-11-13,4,ALLE,Allegion plc,191.49,,,
+2026-11-13,5,MTD,"Mettler-Toledo International, I",1735.95,,,
