@@ -439,3 +439,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-11-17,3,REGN,"Regeneron Pharmaceuticals, Inc.",957.76,957.76,0.0,2026-11-18 03:16
 2026-11-17,4,CDW,CDW Corporation,163.07,163.07,0.0,2026-11-18 03:16
 2026-11-17,5,ALLE,Allegion plc,186.77,186.77,0.0,2026-11-18 03:16
+2026-11-18,1,CDW,CDW Corporation,169.01,,,
+2026-11-18,2,MTD,"Mettler-Toledo International, I",1737.26,,,
+2026-11-18,3,BBY,"Best Buy Co., Inc.",100.31,,,
+2026-11-18,4,MCK,McKesson Corporation,1084.43,,,
+2026-11-18,5,ALLE,Allegion plc,187.82,,,
