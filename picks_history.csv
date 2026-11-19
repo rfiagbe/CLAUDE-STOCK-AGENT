@@ -444,3 +444,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-11-18,3,BBY,"Best Buy Co., Inc.",100.31,100.31,-0.0,2026-11-19 02:54
 2026-11-18,4,MCK,McKesson Corporation,1084.43,1084.43,0.0,2026-11-19 02:54
 2026-11-18,5,ALLE,Allegion plc,187.82,187.82,0.0,2026-11-19 02:54
+2026-11-19,1,OKTA,"Okta, Inc.",206.85,,,
+2026-11-19,2,CDW,CDW Corporation,167.61,,,
+2026-11-19,3,IDXX,"IDEXX Laboratories, Inc.",689.65,,,
+2026-11-19,4,PTC,PTC Inc.,195.63,,,
+2026-11-19,5,MCK,McKesson Corporation,1062.16,,,
