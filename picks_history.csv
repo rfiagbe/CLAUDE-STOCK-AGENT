@@ -449,8 +449,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-11-19,3,IDXX,"IDEXX Laboratories, Inc.",689.65,689.65,0.0,2026-11-20 02:47
 2026-11-19,4,PTC,PTC Inc.,195.63,195.63,0.0,2026-11-20 02:47
 2026-11-19,5,MCK,McKesson Corporation,1062.16,1062.16,0.0,2026-11-20 02:47
-2026-11-20,1,VLTO,Veralto Corp,116.63,,,
-2026-11-20,2,MCK,McKesson Corporation,1069.43,,,
-2026-11-20,3,REGN,"Regeneron Pharmaceuticals, Inc.",920.69,,,
-2026-11-20,4,IDXX,"IDEXX Laboratories, Inc.",676.21,,,
-2026-11-20,5,BDX,"Becton, Dickinson and Company",212.78,,,
+2026-11-20,1,VLTO,Veralto Corp,116.63,116.63,-0.0,2026-11-21 02:57
+2026-11-20,2,MCK,McKesson Corporation,1069.43,1069.43,0.0,2026-11-21 02:57
+2026-11-20,3,REGN,"Regeneron Pharmaceuticals, Inc.",920.69,920.69,0.0,2026-11-21 02:57
+2026-11-20,4,IDXX,"IDEXX Laboratories, Inc.",676.21,676.21,0.0,2026-11-21 02:57
+2026-11-20,5,BDX,"Becton, Dickinson and Company",212.78,212.78,-0.0,2026-11-21 02:57
