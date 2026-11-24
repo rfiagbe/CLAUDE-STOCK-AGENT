@@ -459,3 +459,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-11-23,3,REGN,"Regeneron Pharmaceuticals, Inc.",942.24,942.24,-0.0,2026-11-24 05:42
 2026-11-23,4,PTC,PTC Inc.,196.0,196.0,0.0,2026-11-24 05:42
 2026-11-23,5,VLTO,Veralto Corp,117.78,117.78,-0.0,2026-11-24 05:42
+2026-11-24,1,MRNA,"Moderna, Inc.",227.38,,,
+2026-11-24,2,REGN,"Regeneron Pharmaceuticals, Inc.",987.09,,,
+2026-11-24,3,DLTR,"Dollar Tree, Inc.",154.65,,,
+2026-11-24,4,IDXX,"IDEXX Laboratories, Inc.",712.08,,,
+2026-11-24,5,VLTO,Veralto Corp,119.04,,,
