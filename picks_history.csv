@@ -454,8 +454,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-11-20,3,REGN,"Regeneron Pharmaceuticals, Inc.",920.69,920.69,0.0,2026-11-21 02:57
 2026-11-20,4,IDXX,"IDEXX Laboratories, Inc.",676.21,676.21,0.0,2026-11-21 02:57
 2026-11-20,5,BDX,"Becton, Dickinson and Company",212.78,212.78,-0.0,2026-11-21 02:57
-2026-11-23,1,OKTA,"Okta, Inc.",206.28,,,
-2026-11-23,2,MTD,"Mettler-Toledo International, I",1725.52,,,
-2026-11-23,3,REGN,"Regeneron Pharmaceuticals, Inc.",942.24,,,
-2026-11-23,4,PTC,PTC Inc.,196.0,,,
-2026-11-23,5,VLTO,Veralto Corp,117.78,,,
+2026-11-23,1,OKTA,"Okta, Inc.",206.28,206.28,-0.0,2026-11-24 05:42
+2026-11-23,2,MTD,"Mettler-Toledo International, I",1725.52,1725.52,0.0,2026-11-24 05:42
+2026-11-23,3,REGN,"Regeneron Pharmaceuticals, Inc.",942.24,942.24,-0.0,2026-11-24 05:42
+2026-11-23,4,PTC,PTC Inc.,196.0,196.0,0.0,2026-11-24 05:42
+2026-11-23,5,VLTO,Veralto Corp,117.78,117.78,-0.0,2026-11-24 05:42
