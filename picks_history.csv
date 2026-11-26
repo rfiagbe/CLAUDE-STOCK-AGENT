@@ -469,3 +469,8 @@ date,rank,ticker,name,pick_price,close_price,day_change_pct,updated_at
 2026-11-25,3,IDXX,"IDEXX Laboratories, Inc.",709.46,709.46,0.0,2026-11-26 03:53
 2026-11-25,4,CAH,"Cardinal Health, Inc.",282.91,282.91,0.0,2026-11-26 03:53
 2026-11-25,5,BDX,"Becton, Dickinson and Company",221.24,221.24,0.0,2026-11-26 03:53
+2026-11-26,1,REGN,"Regeneron Pharmaceuticals, Inc.",981.87,,,
+2026-11-26,2,VLTO,Veralto Corp,120.19,,,
+2026-11-26,3,IDXX,"IDEXX Laboratories, Inc.",709.46,,,
+2026-11-26,4,CAH,"Cardinal Health, Inc.",282.91,,,
+2026-11-26,5,BDX,"Becton, Dickinson and Company",221.24,,,
